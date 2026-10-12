@@ -300,7 +300,7 @@ mandats:
     format: retour
     statut: valide
     dates:
-      g1: { debut: 2026-08-18, reddition: 2026-11-24 }   # À CORRIGER
+      g1: { debut: 2026-08-18, reddition: 2026-09-22 }   # À CORRIGER
     pdf_officiel: ""
 
     en_bref: |
