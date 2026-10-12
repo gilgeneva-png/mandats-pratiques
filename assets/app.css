@@ -52,7 +52,18 @@ a{color:inherit}
   display:grid; grid-template-columns:auto 1fr auto; gap:20px 28px; align-items:center;
   padding:22px 26px; border:1.5px solid var(--line); position:relative; overflow:hidden;
 }
-.next::before{content:""; position:absolute; inset:0 auto 0 0; width:10px; background:var(--c)}
+.next::before{content:""; position:absolute; inset:0 auto 0 0; width:10px; background:var(--bar, var(--c))}
+.next.multi{grid-template-columns:auto 1fr}
+.next-list{list-style:none; padding:0; margin:4px 0 8px}
+.next-list li{margin:0 0 4px}
+.next-list a{display:flex; gap:10px; align-items:baseline; font-family:var(--head); font-weight:700; font-size:clamp(18px,2.2vw,23px); line-height:1.2; text-decoration:none}
+.next-list a:hover{text-decoration:underline; text-underline-offset:4px}
+.next-list .co{flex:none; font-size:.72em; font-weight:800; color:#fff; background:var(--c); border-radius:999px; padding:2px 9px; transform:translateY(-2px)}
+.also{display:flex; flex-wrap:wrap; gap:8px 10px; align-items:center; margin:-14px 0 28px; font-size:15px}
+.also-k{color:var(--ink-soft); margin-right:4px}
+.also-mp{display:inline-flex; gap:7px; align-items:center; text-decoration:none; font-weight:700; background:var(--sheet); border:1.5px solid var(--line); border-radius:999px; padding:4px 12px}
+.also-mp:hover{border-color:var(--c)}
+.also-mp i{width:10px; height:10px; border-radius:50%; background:var(--c)}
 .next .days{
   font-family:var(--head); font-weight:800; line-height:.9; text-align:center;
   font-size:clamp(56px,9vw,96px); color:var(--c); min-width:1.6ch; padding-left:6px;
@@ -68,6 +79,9 @@ a{color:inherit}
 @media (max-width:640px){
   .next{grid-template-columns:auto 1fr; padding:18px 18px 18px 26px}
   .next .actions{grid-column:1 / -1}
+  .next.multi{grid-template-columns:1fr; gap:10px}
+  .next.multi .days{display:flex; align-items:baseline; gap:8px; text-align:left; font-size:56px; padding-left:0}
+  .next.multi .days small{margin:0}
 }
 
 /* ---------- Boutons ---------- */

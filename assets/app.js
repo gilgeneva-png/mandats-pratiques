@@ -229,15 +229,26 @@ function renderHome(data){
   let hero;
   if (next){
     const n = daysBetween(now, next.reddition);
-    hero = `<section class="next" style="--c:${next.color}" aria-label="Prochain rendu">
+    const same = dated.filter(m => +m.reddition === +next.reddition);
+    const link = m => `mp.html?id=${encodeURIComponent(m.id)}&g=${g}`;
+    const bar = same.length > 1
+      ? `linear-gradient(${same.map((m,i)=>`${m.color} ${i*100/same.length}% ${(i+1)*100/same.length}%`).join(",")})`
+      : next.color;
+    const what = same.length > 1
+      ? `<p class="kicker">Prochains rendus : ${same.length} mandats le même jour</p>
+         <ul class="next-list">${same.map(m=>`<li style="--c:${m.color}"><a href="${link(m)}"><span class="co">${esc((m.co||"").toUpperCase())}</span>${esc(m.titre)}</a></li>`).join("")}</ul>`
+      : `<p class="kicker">Prochain rendu</p>
+         <h2><a href="${link(next)}">${esc(next.titre)}</a></h2>`;
+    const others = mps.filter(m => m.reddition && m.reddition > next.reddition && m.debut && m.debut <= now);
+    hero = `<section class="next${same.length>1?" multi":""}" style="--c:${next.color};--bar:${bar}" aria-label="Prochain rendu">
       <div class="days">${n}<small>${n===1?"jour":"jours"}</small></div>
       <div class="what">
-        <p class="kicker">Prochain rendu</p>
-        <h2><a href="mp.html?id=${encodeURIComponent(next.id)}&g=${g}">${esc(next.titre)}</a></h2>
+        ${what}
         <p class="when">${cap(fmtLong(next.reddition))}, ${inDays(n)}.</p>
       </div>
-      <div class="actions"><a class="btn solid" href="mp.html?id=${encodeURIComponent(next.id)}&g=${g}">Voir la consigne</a></div>
-    </section>`;
+      ${same.length === 1 ? `<div class="actions"><a class="btn solid" href="${link(next)}">Voir la consigne</a></div>` : ""}
+    </section>
+    ${others.length ? `<div class="also"><span class="also-k">Aussi en cours</span>${others.map(m=>`<a class="also-mp" style="--c:${m.color}" href="${link(m)}"><i></i>${esc((m.co||"").toUpperCase())}, rendu le ${fmtShort(m.reddition)}</a>`).join("")}</div>` : ""}`;
   } else if (dated.length){
     hero = `<section class="next done" style="--c:var(--ink)"><div class="what"><h2>Tous les mandats du semestre sont rendus.</h2>
       <p class="when">Prochaine étape : les entretiens d'évaluation.</p></div></section>`;
