@@ -1,0 +1,684 @@
+# =====================================================================
+#  FICHIER MAÎTRE — Site des mandats pratiques
+#  C'est le SEUL fichier à mettre à jour. Tout le site est généré à
+#  partir de lui (Gantt, pages MP, compte à rebours, fichiers agenda).
+# =====================================================================
+#
+#  MODE D'EMPLOI (5 règles, c'est tout)
+#
+#  1. Dates toujours au format AAAA-MM-JJ   ex : 2026-11-13
+#  2. Indentation = 2 espaces, jamais de tabulation.
+#     L'alignement à gauche définit la structure : ne pas le casser.
+#  3. Texte long : écrire  |  après les deux-points, puis le texte
+#     en dessous, indenté. Dans ce cas, tout caractère est autorisé.
+#  4. Texte court contenant « : » ou « # » → le mettre entre guillemets
+#     ex :  titre: "Objectifs SMART : fixer et mesurer"
+#  5. Une ligne qui commence par # est un commentaire : ignorée par le site.
+#
+#  Si une règle est cassée, le site affiche un message avec le numéro
+#  de la ligne fautive au lieu de planter silencieusement.
+#
+#  Mise en forme autorisée dans les textes : **gras**, *italique*,
+#  listes avec « - » en début de ligne, liens [texte](https://...)
+# =====================================================================
+
+
+# ---------------------------------------------------------------------
+#  1. LE SITE
+# ---------------------------------------------------------------------
+site:
+  titre: "Mes mandats pratiques"
+  sous_titre: "Semestre d'automne 2026-2027"
+  formateur: "Gil Charmillot"
+  dossier_pdf: "https://drive.google.com/drive/folders/10L7ue6DgFDUVYngzcpiG0ArCfbus76du?usp=drive_link"
+                         # lien utilisé si un MP n'a pas son propre pdf_officiel
+  contact: ""            # email affiché en pied de page (laisser vide = rien affiché)
+  rappels_agenda: [7, 1] # alertes dans le fichier agenda : X jours avant la reddition
+
+
+# ---------------------------------------------------------------------
+#  2. LE SEMESTRE  (bornes du Gantt)
+# ---------------------------------------------------------------------
+semestre:
+  debut: 2026-08-17
+  fin: 2027-01-12
+  dernier_rendu: 2026-12-22   # date butoir absolue : aucune reddition ne peut être placée après
+
+
+# ---------------------------------------------------------------------
+#  3. LES GROUPES
+#  Pour l'instant un seul. Pour ajouter le 2e groupe plus tard :
+#  copier le bloc, changer id et nom, puis ajouter ses dates dans
+#  chaque MP (voir section 5).
+# ---------------------------------------------------------------------
+groupes:
+  - id: g1
+    nom: "Équipe Culture+SP"
+    actif: true
+
+
+# ---------------------------------------------------------------------
+#  4. CALENDRIER  (vacances, jours fériés, événements)
+#  type possible :  vacances | ferie | evenement
+#  Source vacances et fériés : ge.ch, calendrier scolaire 2026-2027.
+#  Toute l'année scolaire est saisie : le Gantt n'affiche que ce qui
+#  tombe dans les bornes du semestre ci-dessus.
+# ---------------------------------------------------------------------
+calendrier:
+  - nom: "Jeûne genevois"
+    type: ferie
+    debut: 2026-09-10
+    fin: 2026-09-10
+
+  - nom: "Vacances d'automne"
+    type: vacances
+    debut: 2026-10-19
+    fin: 2026-10-23
+
+  - nom: "Vacances de Noël et Nouvel An"
+    type: vacances
+    debut: 2026-12-24
+    fin: 2027-01-08
+
+  - nom: "Vacances de février"
+    type: vacances
+    debut: 2027-02-15
+    fin: 2027-02-19
+
+  - nom: "Vacances de Pâques"
+    type: vacances
+    debut: 2027-03-26
+    fin: 2027-04-09
+
+  - nom: "Pont de l'Ascension"
+    type: ferie
+    debut: 2027-05-06
+    fin: 2027-05-07
+
+  - nom: "Lundi de Pentecôte"
+    type: ferie
+    debut: 2027-05-17
+    fin: 2027-05-17
+
+  - nom: "Entretiens d'évaluation individuels"
+    type: evenement
+    debut: 2027-01-11
+    fin: 2027-01-12
+
+  # Exemple d'événement (CI, TP oraux, entretiens de qualification...)
+  # Supprimer le # devant les 4 lignes pour l'activer.
+  # - nom: "TP oraux blancs"
+  #   type: evenement
+  #   debut: 2026-12-14
+  #   fin: 2026-12-14
+
+
+# ---------------------------------------------------------------------
+#  5. LES MANDATS PRATIQUES
+#  Un bloc par MP. L'ordre ici = l'ordre d'affichage.
+#
+#  ── LE CŒUR DE LA MISSION (ce que tu modifies le plus souvent) ──
+#    mission_terrain   ta consigne, en texte libre
+#    livrables         ce qu'ils déposent sur Konvink
+#    learnings_pistes  1-2 questions propres à ce MP pour la case Learnings
+#                      (le modèle commun est en section 6)
+#
+#  ── AUTOÉVALUATION (repris de la grille du semestre) ──
+#    grille_autoeval      nom de la grille Konvink
+#    items_autoeval       numéros des bulles bleues, ex. [9, 10, 11]
+#    questions_directrices
+#
+#  format : officiel | journal | outil | retour  → badge sur la page
+#    officiel = tâches partielles faites telles que dans le PDF
+#
+#  statut : valide | proposition
+#    « proposition » affiche un bandeau « consigne provisoire » sur la
+#    page. Passe à « valide » quand la consigne est définitive.
+#
+#  Champs obligatoires : id, titre, co, dates. Tout champ vide ou
+#  absent n'apparaît simplement pas sur la page.
+#
+#  DATES : propositions, À CORRIGER selon ton planning.
+# ---------------------------------------------------------------------
+mandats:
+
+  # ===================================================================
+  - id: a1-talents
+    titre: "Découvrir ses talents, ses forces et ses faiblesses"
+    co: a1
+    co_titre: "Examiner et développer des compétences commerciales"
+    mp_officiel: "A1 – MP03"
+    format: officiel
+    statut: valide
+    dates:
+      g1: { debut: 2026-10-26, reddition: 2026-11-06 }   # À CORRIGER
+    pdf_officiel: ""
+
+    en_bref: |
+      Un MP introspectif : tu fais le point sur toi, tes talents,
+      tes forces et tes faiblesses, et tu en tires des mesures.
+
+    mission_terrain: |
+      Pour ce MP, tu suis **les tâches partielles du document officiel,
+      telles quelles**. Ouvre le PDF et traite les tâches 1 à 4 dans l'ordre.
+      Ce qui compte : chaque force ou faiblesse que tu cites doit
+      pouvoir être illustrée par une situation vécue (entreprise,
+      école, CI).
+
+    livrables:
+      - "Tes réponses aux questions de la tâche partielle 1"
+      - "Ta vue d'ensemble : talents / forces / faiblesses"
+      - "Tes mesures (tâche partielle 3)"
+      - "Ta case Learnings"
+
+    learnings_pistes:
+      - "Quel talent as-tu découvert ou confirmé, et dans quelle situation ?"
+
+    grille_autoeval: "DCO A — École"
+    items_autoeval: [4]
+    questions_directrices: |
+      Est-ce que j'accompagne mon propre développement professionnel
+      de manière proactive ? (attentes réalistes, je connais mes forces
+      et faiblesses, je les analyse)
+
+    niveau_cfc:
+      insuffisant:
+        - "Liste générique (« je suis motivé·e ») sans exemple"
+        - "Mesures vagues"
+      acquis:
+        - "Chaque force ou faiblesse est appuyée par une situation vécue"
+        - "Mesures concrètes et réalistes"
+      maitrise:
+        - "Distingue talent (facilité, plaisir) et force (acquise par l'effort)"
+        - "Confronte son auto-évaluation au regard d'une autre personne"
+
+    theorie_essentiel: |
+      - **Talent** : ce que tu fais avec facilité et plaisir, là où tu
+        reçois souvent de bons retours.
+      - **Force** : ce que tu sais bien faire, souvent grâce au travail.
+      - **Faiblesse** : là où tu butes toujours sur les mêmes problèmes.
+      Une faiblesse connue n'est pas un problème : c'est le point de
+      départ d'une mesure.
+
+    liens_theorie:
+      - titre: "Konvink — Réaliser un bilan personnel"
+        url: "https://app.konvink.ch/Institution/126/30951/2/StorageItem/17165/24262?isPreview=False"
+
+    pieges:
+      - "Écrire ce qu'on pense que le formateur veut lire"
+      - "Lister des qualités sans aucun exemple vécu"
+
+    avant_de_rendre:
+      - "J'ai traité les 4 tâches partielles"
+      - "Chaque force et faiblesse renvoie à une situation vécue"
+      - "J'ai rempli l'autoévaluation, item 4"
+      - "Ma case Learnings est écrite avec mes mots"
+
+
+  # ===================================================================
+  - id: a3-mandat
+    titre: "Expliquer et mettre en œuvre un mandat"
+    co: a3
+    co_titre: "Recevoir et exécuter des mandats propres au domaine commercial"
+    mp_officiel: "A3 – MP01"
+    format: outil
+    statut: valide
+    dates:
+      g1: { debut: 2026-09-07, reddition: 2026-12-18 }   # À CORRIGER (dure tout le semestre)
+    pdf_officiel: ""
+
+    en_bref: |
+      L'outil de réception de mandat créé par l'équipe, utilisé tout
+      le semestre, et ce que tu en as tiré.
+
+    mission_terrain: |
+      Le binôme qui a présenté ce MP a créé **l'outil de réception de
+      mandat** de l'équipe. Pendant tout le semestre, tu l'utilises
+      chaque fois que tu reçois un mandat.
+      - Garde tes fiches remplies (elles sont manuscrites) et
+        **prends-les en photo**.
+      - À la reddition, joins les photos et explique **comment tu as
+        utilisé l'outil au fil du semestre** et **en quoi il t'a été utile**.
+      - Si tu l'as modifié ou adapté, dis ce que tu as changé et pourquoi.
+
+    livrables:
+      - "Les photos de tes fiches de réception de mandat (pièces jointes)"
+      - "Ton explication : comment tu as utilisé l'outil, et quand"
+      - "En quoi il t'a été utile (au moins un exemple précis)"
+      - "Tes éventuelles modifications de l'outil, et pourquoi"
+      - "Ta case Learnings"
+
+    learnings_pistes:
+      - "Quel mandat aurait mal tourné sans clarification ?"
+
+    grille_autoeval: "DCO A — École"
+    items_autoeval: [9, 10, 11]
+    questions_directrices: |
+      Puis-je procéder à une clarification complète du mandat ?
+      Suis-je en mesure de planifier efficacement la mise en œuvre de mes mandats ?
+      Est-ce que je procède de façon structurée et ciblée lorsque je traite mes tâches ?
+
+    niveau_cfc:
+      insuffisant:
+        - "Fiches remplies après coup ou toutes le même jour"
+        - "Explication générale, sans exemple"
+      acquis:
+        - "Fiches réparties sur le semestre"
+        - "Utilité expliquée par une situation précise"
+      maitrise:
+        - "A adapté l'outil à sa pratique et justifie le changement"
+        - "Montre une progression dans la qualité de ses clarifications"
+
+    theorie_essentiel: |
+      **Clarification de la mission** : avant de commencer, tu sais
+      *quoi* livrer, *pourquoi*, *pour qui*, *sous quelle forme* et
+      *pour quand*. Si une réponse manque, tu la demandes.
+      Ensuite : tu planifies (important / urgent), tu exécutes, tu fais
+      un auto-contrôle, tu remets. Retard prévisible : tu préviens tôt.
+
+    liens_theorie:
+      - titre: "Konvink — Traiter et exécuter le mandat"
+        url: "https://app.konvink.ch/Institution/126/30953/2/StorageItem/17019/24285?isPreview=False"
+
+    pieges:
+      - "Attendre décembre pour remplir les fiches"
+      - "Photos illisibles"
+
+    avant_de_rendre:
+      - "Mes photos sont lisibles"
+      - "Mes fiches couvrent plusieurs semaines"
+      - "J'explique l'utilité avec un exemple précis"
+      - "J'ai rempli l'autoévaluation, items 9, 10, 11"
+
+
+  # ===================================================================
+  - id: e2-infos-entreprise
+    titre: "Rechercher et utiliser des informations relatives à l'entreprise"
+    co: e2
+    co_titre: "Rechercher et évaluer des informations dans le domaine commercial et économique"
+    mp_officiel: "E2 – MP02"
+    format: retour
+    statut: valide
+    dates:
+      g1: { debut: 2026-11-02, reddition: 2026-11-20 }   # À CORRIGER
+    pdf_officiel: ""
+
+    en_bref: |
+      Tu as fait beaucoup de recherches sur des entreprises :
+      raconte comment tu t'y es pris et ce que tu en as fait.
+
+    mission_terrain: |
+      Ce semestre, tu as mené de nombreuses **recherches sur des
+      entreprises**. Choisis-en une ou deux et raconte :
+      - ce que tu cherchais et pourquoi ;
+      - où tu as cherché, et comment tu as jugé la fiabilité des sources ;
+      - comment tu as documenté tes résultats ;
+      - comment tu as **utilisé** ces informations ensuite ;
+      - ce que tu ferais autrement pour une prochaine recherche.
+
+    livrables:
+      - "Ton retour d'expérience sur 1 ou 2 recherches"
+      - "Un extrait de ta documentation (notes, tableau, fiche)"
+      - "Ta case Learnings"
+
+    learnings_pistes:
+      - "Quelle source t'a été la plus utile, et laquelle t'a induit en erreur ?"
+
+    grille_autoeval: "DCO E — Entreprise"
+    items_autoeval: [9, 10, 11]
+    questions_directrices: |
+      Suis-je en mesure de documenter mes résultats de recherche de manière appropriée ?
+      Suis-je capable d'analyser et d'optimiser constamment ma manière de procéder ?
+      Suis-je capable d'intégrer dans mes actions des informations concernant l'entreprise obtenues grâce à mes recherches ?
+
+    niveau_cfc:
+      insuffisant:
+        - "Raconte ce qu'il a trouvé, pas comment"
+        - "Aucune source citée"
+      acquis:
+        - "Démarche décrite, sources citées et évaluées"
+        - "Utilisation concrète des informations"
+      maitrise:
+        - "Compare deux sources et justifie son choix"
+        - "Propose une amélioration de sa méthode"
+
+    theorie_essentiel: |
+      Pour évaluer une source : **qui** l'a produite, **quand**, est-elle
+      **à jour**, est-elle **confirmée** par une autre source ?
+      Documenter = garder, pour chaque information, sa source et la date
+      à laquelle tu l'as trouvée. Une information non documentée est
+      une information perdue.
+
+    liens_theorie:
+      - titre: "Konvink — Consigne et documente les résultats (étapes 5-6-7)"
+        url: "https://app.konvink.ch/Institution/126/31148/2/StorageItem/17178/24439?isPreview=False"
+
+    pieges:
+      - "Décrire l'entreprise trouvée au lieu de décrire ta démarche"
+      - "Oublier la partie « comment j'ai utilisé l'information »"
+
+    avant_de_rendre:
+      - "Je décris ma démarche, pas seulement le résultat"
+      - "Mes sources sont citées"
+      - "J'ai rempli l'autoévaluation, items 9, 10, 11"
+
+
+  # ===================================================================
+  - id: c3-calendrier
+    titre: "Créer et superviser un calendrier"
+    co: c3
+    co_titre: "Documenter, coordonner et mettre en œuvre des processus en entreprise"
+    mp_officiel: "C3 – MP03"
+    format: outil
+    statut: valide
+    dates:
+      g1: { debut: 2026-11-02, reddition: 2026-12-18 }   # À CORRIGER
+    pdf_officiel: ""
+
+    en_bref: |
+      Le calendrier de ton mandat de transfert : tu le crées, tu le
+      fais vivre, tu en tires les leçons.
+
+    mission_terrain: |
+      Ton **mandat de transfert** (travail de l'école) est un vrai projet.
+      Tu en crées le **calendrier** : tâches, jalons, délais, responsables.
+      Tu le tiens à jour au fil du projet et, quand un délai glisse, tu
+      l'indiques. À la reddition, tu déposes :
+      - ton calendrier initial ;
+      - au moins une version mise à jour ;
+      - ton évaluation : la planification était-elle réaliste ? qu'as-tu
+        dû ajuster ?
+
+    livrables:
+      - "Le calendrier initial du mandat de transfert"
+      - "Au moins une version mise à jour (datée)"
+      - "Ton évaluation du calendrier"
+      - "Ta case Learnings"
+
+    learnings_pistes:
+      - "Quel délai a glissé, et qu'as-tu fait ?"
+
+    grille_autoeval: "DCO C — Entreprise"
+    items_autoeval: [6]
+    questions_directrices: |
+      Est-ce que je gère les calendriers de projets de manière
+      professionnelle ? (classement, format, suivi, communication)
+
+    niveau_cfc:
+      insuffisant:
+        - "Calendrier créé mais jamais mis à jour"
+        - "Absences et vacances ignorées"
+      acquis:
+        - "Jalons et délais réalistes"
+        - "Reports identifiés et communiqués"
+      maitrise:
+        - "Prévoit des marges dès le départ"
+        - "Évaluation lucide de l'écart entre le prévu et le réel"
+
+    theorie_essentiel: |
+      Étapes : **obtenir les informations** (tâches, délais, personnes)
+      → **établir** le calendrier (ordre des tâches, jalons, délais)
+      → **surveiller** → **gérer et communiquer les reports**
+      → **réfléchir** au calendrier une fois le projet terminé.
+      Un **jalon** est un point de contrôle : une étape terminée et
+      vérifiable. Pense toujours aux vacances, aux absences et aux marges.
+
+    liens_theorie:
+      - titre: "Konvink — Établir et surveiller un calendrier"
+        url: "https://app.konvink.ch/Institution/126/31140/2/StorageItem/17029/26789?isPreview=False"
+
+    pieges:
+      - "Faire un beau calendrier au début et ne plus le toucher"
+      - "Oublier les vacances de Noël dans la planification"
+
+    avant_de_rendre:
+      - "Je dépose au moins deux versions datées"
+      - "Mon évaluation compare le prévu et le réel"
+      - "J'ai rempli l'autoévaluation, item 6"
+
+
+  # ===================================================================
+  - id: d2-avantage-client
+    titre: "Montrer l'avantage client lors des entretiens de conseil"
+    co: d2
+    co_titre: "Mener des entretiens d'information et de conseil avec des clients et des fournisseurs"
+    mp_officiel: "D2 – MP02"
+    format: retour
+    statut: valide
+    dates:
+      g1: { debut: 2026-11-16, reddition: 2026-12-11 }   # À CORRIGER
+    pdf_officiel: ""
+
+    en_bref: |
+      Tu vas présenter l'équipe et ses prestations à de vrais clients.
+      Tu prépares, tu présentes, tu analyses.
+
+    mission_terrain: |
+      Tu vas **présenter l'équipe Culture+SP et ses prestations à des
+      clients**. Pour t'y préparer :
+      - identifie les besoins fréquents des associations (demande à
+        tes collègues) ;
+      - pour chaque besoin, la prestation qui y répond et le **bénéfice
+        concret pour le client** ;
+      - prépare la réponse aux inconvénients possibles.
+      Après la présentation, analyse : quels arguments ont porté,
+      lesquels non, et pourquoi.
+
+    livrables:
+      - "Ton aperçu besoins / prestations / bénéfices / inconvénients"
+      - "Ton retour sur la présentation client"
+      - "Ta case Learnings"
+
+    learnings_pistes:
+      - "Quel argument a fait réagir le client, et pourquoi selon toi ?"
+
+    grille_autoeval: "DCO D — Entreprise"
+    items_autoeval: [3]
+    questions_directrices: |
+      Mes entretiens de conseil sont-ils préparés de manière appropriée ?
+      (je connais les produits et services de l'EE, j'anticipe les
+      besoins, je me renseigne sur les solutions, je présente mes solutions)
+
+    niveau_cfc:
+      insuffisant:
+        - "Présente des prestations sans lien avec les besoins"
+        - "Inconvénients cachés"
+      acquis:
+        - "Chaque prestation est reliée à un besoin du client"
+        - "Inconvénients présentés honnêtement et justifiés"
+      maitrise:
+        - "Reprend les mots du client pour argumenter"
+        - "Analyse avec recul ce qui a convaincu ou non"
+
+    theorie_essentiel: |
+      **Caractéristique → avantage → bénéfice client**
+      - Caractéristique : ce qu'est la prestation.
+      - Avantage : ce qu'elle permet en général.
+      - Bénéfice : ce qu'elle apporte à *ce* client, par rapport à
+        *son* besoin. C'est seulement là que le client est convaincu.
+      Un inconvénient se dit, mais se justifie
+      (« plus long, parce que plus complet »).
+
+    liens_theorie:
+      - titre: "Konvink — Mener des entretiens de conseil"
+        url: "https://app.konvink.ch/Institution/126/31144/2/StorageItem/17033/24366?isPreview=False"
+
+    pieges:
+      - "Lister les prestations au lieu de partir des besoins"
+      - "Préparer des besoins imaginaires au lieu de demander à l'équipe"
+
+    avant_de_rendre:
+      - "Chaque prestation de mon aperçu est reliée à un besoin"
+      - "Mon retour dit ce qui a convaincu et ce qui n'a pas convaincu"
+      - "J'ai rempli l'autoévaluation, item 3"
+
+
+  # ===================================================================
+  #  b2 et e1 : PROPOSITIONS DE CLAUDE, non validées. À reprendre.
+  # ===================================================================
+  - id: b2-mandat-complexe
+    titre: "Recueillir et traiter des informations sur les mandats"
+    co: b2
+    co_titre: "Coordonner les interfaces dans les processus en entreprise"
+    mp_officiel: "B2 – MP04"
+    format: retour
+    statut: proposition
+    dates:
+      g1: { debut: 2026-11-09, reddition: 2026-12-04 }   # À CORRIGER
+    pdf_officiel: ""
+
+    en_bref: |
+      Un mandat réel à plusieurs étapes : tu rassembles les bonnes
+      informations auprès des bonnes personnes, tu l'exécutes, et tu
+      analyses la collaboration.
+
+    mission_terrain: |
+      Avec moi, tu choisis **un mandat réel à plusieurs étapes** pour
+      une association cliente ou pour l'équipe. Avant d'agir, tu
+      construis l'**aperçu des informations** : quoi, où, sous quel
+      format, qui informer, quel canal, quel contrôle. Tu exécutes le
+      mandat, puis tu fais un retour sur les échanges avec les
+      personnes internes et externes.
+
+    livrables:
+      - "Ton aperçu des informations (tableau)"
+      - "Ton retour : ce qui a bien fonctionné, les malentendus, ce que tu changerais"
+      - "Ta case Learnings"
+
+    learnings_pistes:
+      - "Quel malentendu as-tu rencontré, et qu'aurais-tu dû demander dès le départ ?"
+
+    grille_autoeval: "DCO B — Entreprise"
+    items_autoeval: [5]
+    questions_directrices: |
+      Suis-je en mesure de recueillir et de traiter des informations sur
+      les mandats de manière professionnelle au niveau des interfaces en
+      entreprise ? (recueillir des infos de manière groupée, je vérifie
+      moi-même, etc.)
+
+    niveau_cfc:
+      insuffisant:
+        - "Aperçu incomplet (personnes ou délais oubliés)"
+        - "Retour descriptif, sans analyse"
+      acquis:
+        - "Aperçu complet et utilisé pendant l'exécution"
+        - "Malentendus identifiés et expliqués"
+      maitrise:
+        - "Informations recueillies et transmises de manière groupée"
+        - "Propose une amélioration de l'interface concernée"
+
+    theorie_essentiel: |
+      Une **interface**, c'est un point où une tâche passe d'une personne
+      ou d'un service à un autre. C'est là que naissent les malentendus.
+      Bonne pratique : réfléchir *avant* à quelles informations tu dois
+      obtenir de qui, et à qui elles doivent être transmises, pour tout
+      demander et tout transmettre en une fois.
+
+    liens_theorie:
+      - titre: "Konvink — Agir professionnellement au niveau des interfaces"
+        url: "https://app.konvink.ch/Institution/126/31134/2/StorageItem/17023/24317?isPreview=False"
+
+    pieges:
+      - "Construire l'aperçu après avoir exécuté le mandat"
+      - "Ne parler que de la tâche et pas des personnes"
+
+    avant_de_rendre:
+      - "Mon aperçu est fait avant l'exécution"
+      - "J'identifie au moins un malentendu ou une difficulté"
+      - "J'ai rempli l'autoévaluation, item 5"
+
+
+  # ===================================================================
+  - id: e1-logiciels
+    titre: "Travailler avec des logiciels et des bases de données"
+    co: e1
+    co_titre: "Utiliser des applications propres au domaine commercial"
+    mp_officiel: "E1 – MP03"
+    format: outil
+    statut: proposition
+    dates:
+      g1: { debut: 2026-10-26, reddition: 2026-11-27 }   # À CORRIGER (4 semaines de pratique)
+    pdf_officiel: ""
+
+    en_bref: |
+      Tu cartographies les outils numériques de l'équipe et tu prends
+      en charge un fichier de données réel pendant quatre semaines.
+
+    mission_terrain: |
+      Tu construis **la carte des outils de l'équipe** : pour chaque
+      outil, son usage, ses avantages, ses inconvénients, ses liens avec
+      les autres outils. Puis, pendant **quatre semaines**, tu es
+      responsable d'un fichier de données réel de l'équipe : tu le
+      saisis, le nettoies, le mets à jour ou l'archives, et tu notes
+      chaque semaine ce que tu as fait.
+
+    livrables:
+      - "La carte des outils (tableau)"
+      - "Tes 4 relevés hebdomadaires"
+      - "Ton analyse : état du fichier avant / après, règles de protection des données appliquées"
+      - "Ta case Learnings"
+
+    learnings_pistes:
+      - "Quel était le principal défaut du fichier au départ ?"
+
+    grille_autoeval: "DCO E — Entreprise"
+    items_autoeval: [1]
+    questions_directrices: |
+      Suis-je capable d'utiliser correctement différentes applications ?
+      (utilisation, avantages, inconvénients, respect des directives,
+      je m'améliore, je résous mes problèmes)
+
+    niveau_cfc:
+      insuffisant:
+        - "Liste d'outils sans analyse"
+        - "Travail sur les données ponctuel, pas suivi"
+      acquis:
+        - "Carte complète et utilisable par un tiers"
+        - "Quatre semaines de suivi documentées"
+      maitrise:
+        - "Propose une amélioration concrète du fichier ou de son usage"
+        - "Applique et explique les règles de protection des données"
+
+    theorie_essentiel: |
+      - Une **base de données** = des informations structurées en champs
+        (nom, contact, date...) et en enregistrements (une ligne par client).
+      - **Qualité des données** : pas de doublons, champs complets, format
+        uniforme, données à jour.
+      - **Protection des données** : tu n'accèdes et ne partages que ce
+        dont tu as besoin ; données personnelles jamais hors des outils
+        de l'entreprise.
+
+    liens_theorie:
+      - titre: "Konvink — Utiliser les applications"
+        url: "https://app.konvink.ch/Institution/126/31147/2/StorageItem/17177/26765?isPreview=False"
+
+    pieges:
+      - "Recopier une liste d'avantages trouvée en ligne au lieu de parler de l'usage réel"
+      - "Tout reconstituer à la fin au lieu de noter chaque semaine"
+
+    avant_de_rendre:
+      - "Ma carte des outils est compréhensible sans moi"
+      - "J'ai 4 relevés hebdomadaires datés"
+      - "Aucune donnée personnelle n'apparaît dans mon dépôt"
+      - "J'ai rempli l'autoévaluation, item 1"
+
+
+# ---------------------------------------------------------------------
+#  6. LA CASE « LEARNINGS »  (modèle commun, affiché sur chaque page MP)
+#  Les « learnings_pistes » de chaque MP s'ajoutent à ces questions.
+# ---------------------------------------------------------------------
+learnings:
+  intro: |
+    La case Learnings, c'est **ton résumé à toi** : la situation, la
+    compétence, ce que tu en retiens. Écris-la comme si tu devais la
+    raconter à l'oral, sans tes notes. Si tu ne peux pas la défendre
+    en deux minutes, elle n'est pas encore prête.
+  questions:
+    - "La situation : où, quand, avec qui, quelle tâche ?"
+    - "La compétence avec tes mots : qu'est-ce qu'elle veut dire, et à quoi elle sert dans ton métier ?"
+    - "Ce que tu as fait concrètement, étape par étape"
+    - "Ce que tu en retiens, et ce que tu ferais autrement la prochaine fois"
+  regles:
+    - "Écrit au « je », avec des noms réels (l'équipe, l'association, l'outil)"
+    - "10 à 15 lignes suffisent"
+    - "Aucune définition copiée : si tu ne l'expliquerais pas comme ça à l'oral, réécris-la"
