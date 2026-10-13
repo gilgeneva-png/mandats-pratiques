@@ -227,6 +227,10 @@ a{color:inherit}
 .check input:checked + span{text-decoration:line-through; color:var(--ink-soft)}
 .progress{font-weight:700; margin:0 0 10px}
 
+/* ---------- Bandeau brouillon ---------- */
+.draft-bar{background:repeating-linear-gradient(135deg,#FFE58A 0 14px,#FFD84D 14px 28px); color:#1F2A44; font-size:15px; padding:9px 16px; text-align:center}
+.draft-bar a{font-weight:700; margin-left:8px}
+
 /* ---------- Pied de page & erreurs ---------- */
 .foot{color:var(--ink-soft); font-size:14.5px; padding-top:30px; padding-bottom:40px}
 .error{background:var(--sheet); border:2.5px solid var(--alert); border-radius:var(--radius-lg); padding:22px 24px; margin:28px 0}

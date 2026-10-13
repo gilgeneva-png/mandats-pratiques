@@ -68,22 +68,44 @@ function md(text){
   return html;
 }
 
+/* ---------- Fichier source ----------
+   Par défaut : mandats.yml (la version que voient les apprentis).
+   Aperçu d'un brouillon : ajouter ?fichier=nom.yml à l'adresse. */
+const DEFAULT_SRC = "mandats.yml";
+const SRC = (() => {
+  const f = new URLSearchParams(location.search).get("fichier");
+  return f && /^[\w-]+\.yml$/.test(f) ? f : DEFAULT_SRC;
+})();
+const DRAFT = SRC !== DEFAULT_SRC;
+
+/* En aperçu, chaque lien interne garde le paramètre ?fichier= */
+function keepDraftInLinks(){
+  if (!DRAFT) return;
+  document.querySelectorAll('a[href^="mp.html"], a[href^="./"]').forEach(a => {
+    const u = new URL(a.getAttribute("href"), location.href);
+    u.searchParams.set("fichier", SRC);
+    a.setAttribute("href", (u.pathname.split("/").pop() || "./") + u.search);
+  });
+  document.body.insertAdjacentHTML("afterbegin",
+    `<div class="draft-bar">Aperçu du brouillon <b>${esc(SRC)}</b>. Les apprentis ne voient pas cette version. <a href="./">Voir le site publié</a></div>`);
+}
+
 /* ---------- Chargement des données ---------- */
 async function load(){
   let txt;
   try{
-    const r = await fetch("mandats.yml?v=" + Date.now(), {cache:"no-store"});
+    const r = await fetch(SRC + "?v=" + Date.now(), {cache:"no-store"});
     if (!r.ok) throw new Error("HTTP " + r.status);
     txt = await r.text();
   }catch(e){
-    throw {title:"Le fichier mandats.yml est introuvable",
+    throw {title:`Le fichier ${SRC} est introuvable`,
       detail:"Vérifie qu'il se trouve bien à côté de index.html, avec ce nom exact.\n(" + e.message + ")"};
   }
   let data;
   try{ data = jsyaml.load(txt); }
   catch(e){
     const line = e.mark ? e.mark.line + 1 : "?";
-    throw {title:`Erreur dans mandats.yml, ligne ${line}`,
+    throw {title:`Erreur dans ${SRC}, ligne ${line}`,
       detail:"Le site ne peut pas lire le fichier maître. Causes les plus fréquentes :\n" +
         "– une tabulation au lieu d'espaces, ou un décalage d'indentation ;\n" +
         "– un texte contenant « : » ou « # » sans guillemets ;\n" +
@@ -169,6 +191,7 @@ function buildIcs(data, items, g){
   return L.map(fold).join("\r\n");
 }
 function downloadIcs(name, text){
+  if (DRAFT && !confirm("Ceci est un brouillon : les dates peuvent encore changer. Télécharger quand même ?")) return;
   const blob = new Blob([text], {type:"text/calendar;charset=utf-8"});
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob); a.download = name;
@@ -210,7 +233,7 @@ function warningsHtml(data, mps){
       w.push(`« ${m.titre} » a une reddition (${fmtShort(m.reddition)}) après le dernier rendu du semestre (${fmtShort(data.limit)}).`);
   for (const m of mps) if (m.id && !m.reddition) w.push(`« ${m.titre} » n'a pas de date de reddition pour ce groupe.`);
   if (!w.length) return "";
-  return `<div class="warn" role="status"><b>À corriger dans mandats.yml :</b><ul style="margin:6px 0 0;padding-left:20px">${w.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`;
+  return `<div class="warn" role="status"><b>À corriger dans ${esc(SRC)} :</b><ul style="margin:6px 0 0;padding-left:20px">${w.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`;
 }
 
 /* ==========================================================
@@ -278,7 +301,7 @@ function renderHome(data){
 function weekStart(d){ const w = (d.getUTCDay()+6)%7; return new Date(+d - w*DAY); }
 
 function gantt(data, mps, g, now){
-  if (!data.start || !data.end) return `<p class="warn">Indique semestre.debut et semestre.fin dans mandats.yml pour afficher le planning.</p>`;
+  if (!data.start || !data.end) return `<p class="warn">Indique semestre.debut et semestre.fin dans ${esc(SRC)} pour afficher le planning.</p>`;
   const t0 = weekStart(data.start);
   const t1 = new Date(+weekStart(data.end) + 7*DAY);
   const total = daysBetween(t0, t1);
@@ -375,7 +398,7 @@ function renderMp(data){
   const id = new URLSearchParams(location.search).get("id");
   const raw = data.mps.find(m => m.id === id);
   if (!raw){
-    showError({title:"Ce mandat n'existe pas", detail:`Aucun MP avec l'id « ${id || ""} » dans mandats.yml.\nRetourne à l'accueil pour choisir un mandat.`});
+    showError({title:"Ce mandat n'existe pas", detail:`Aucun MP avec l'id « ${id || ""} » dans ${SRC}.\nRetourne à l'accueil pour choisir un mandat.`});
     document.querySelector(".error").insertAdjacentHTML("beforeend", '<p><a class="btn" href="./">Retour à l\'accueil</a></p>');
     return;
   }
@@ -493,6 +516,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   try{
     const data = await load();
     if (document.body.dataset.page === "mp") renderMp(data); else renderHome(data);
+    keepDraftInLinks();
   }catch(e){ console.error(e); showError(e); }
 });
 })();
