@@ -1,0 +1,121 @@
+# =====================================================================
+#  PAGE « COMMENT JE SUIS ÉVALUÉ·E »
+#  Ce fichier se modifie comme mandats.yml (mêmes règles : espaces,
+#  guillemets, textes longs après | ). Il ne dépend pas du semestre.
+#
+#  Mise en forme possible dans les textes : **gras**, *italique*,
+#  listes avec « - » en début de ligne.
+# =====================================================================
+
+titre: "Comment je suis évalué·e"
+intro: |
+  Ta note **confirme** ce que tu as acquis. Elle n'est pas là pour te
+  piéger. Si une compétence n'est pas encore là, on ne parle pas
+  d'échec : on dit « pas encore prêt·e », et on travaille dessus.
+
+
+# ---------------------------------------------------------------------
+#  LA NOTE OFFICIELLE DU SEMESTRE
+#  « part » = pourcentage affiché dans la barre.
+# ---------------------------------------------------------------------
+note_officielle:
+  titre: "La note officielle du semestre"
+  texte: |
+    Ta note de semestre est construite en **deux blocs de même poids**.
+  blocs:
+    - nom: "Mandats pratiques"
+      part: 50
+      detail: "Les mandats pratiques du semestre, rendus sur Konvink."
+    - nom: "4 autres critères"
+      part: 50
+      criteres:
+        - "Autoévaluation"
+        - "Learnings"
+        - "Motivation et initiative"
+        - "Collaboration"
+
+
+# ---------------------------------------------------------------------
+#  LES SECTIONS
+#  Chaque section : titre, texte (facultatif), points (facultatif).
+#  Chaque point : titre, texte, compte_dans (liste facultative).
+# ---------------------------------------------------------------------
+sections:
+
+  - titre: "Ce qui compte, concrètement"
+    texte: |
+      Tout au long du semestre, ces comportements te rapportent des points.
+      Le mot qui les relie : **autonomie**.
+    points:
+      - titre: "Rendre tes mandats à temps, sans qu'on te le rappelle"
+        texte: |
+          Toutes les dates sont sur ce site. Les respecter de toi-même
+          fait partie de ton évaluation.
+        compte_dans: ["Mandats pratiques", "Motivation et initiative"]
+      - titre: "Compléter correctement tâches partielles et Learnings"
+        texte: |
+          Chaque tâche partielle du document officiel doit apparaître dans
+          ce que tu rends. Ta case Learnings est écrite avec tes mots.
+        compte_dans: ["Mandats pratiques", "Learnings"]
+      - titre: "Remplir ton autoévaluation"
+        texte: |
+          Les numéros des items à remplir sont indiqués sur la page de
+          chaque mandat.
+        compte_dans: ["Autoévaluation"]
+      - titre: "Ta présentation en binôme"
+        texte: |
+          Ce n'est pas la perfection qui est évaluée, c'est **l'effort** :
+          la préparation, et une présentation qui fait participer tes
+          collègues.
+        compte_dans: ["Motivation et initiative", "Collaboration"]
+      - titre: "Être à l'heure"
+        texte: |
+          Au début de la journée, après les pauses, aux rendez-vous.
+        compte_dans: ["Motivation et initiative"]
+      - titre: "Travailler de manière proactive"
+        texte: |
+          Proposer, anticiper, venir me voir **avant** d'être bloqué·e,
+          aller au-delà du minimum demandé.
+        compte_dans: ["Motivation et initiative", "Collaboration"]
+
+  - titre: "Le suivi : les entretiens individuels"
+    texte: |
+      On fait le point ensemble lors d'entretiens individuels, au fil du
+      semestre puis en fin de semestre. C'est là qu'on parle de ce qui
+      avance, de ce qui coince, et de ta note.
+
+  - titre: "Le TP oral"
+    texte: |
+      Le TP oral fait partie de l'évaluation, mais **ce n'est pas lui qui
+      fait ta note**. C'est d'abord un entraînement aux examens finaux du
+      CFC, dans les mêmes conditions :
+      - 3 minutes de préparation
+      - 4 minutes de présentation
+      - 3 minutes de questions
+
+  - titre: "Note du semestre et examen CFC"
+    texte: |
+      La note du semestre n'est pas l'examen CFC. C'est la preuve que tu
+      avances vers lui : chaque mandat, chaque entretien et chaque TP oral
+      t'y préparent.
+
+
+# ---------------------------------------------------------------------
+#  LES MOTS À CONNAÎTRE
+# ---------------------------------------------------------------------
+glossaire_titre: "Les mots à connaître"
+glossaire:
+  - mot: "Plan de formation"
+    sens: "Le document officiel qui décrit tout ce que tu dois savoir faire à la fin de ton CFC."
+  - mot: "DCO"
+    sens: "Domaine de compétences opérationnelles : une grande famille de compétences. Il y en a cinq, de A à E."
+  - mot: "CO"
+    sens: "Compétence opérationnelle : une compétence précise dans un domaine, par exemple a3 « Recevoir et exécuter des mandats »."
+  - mot: "MP"
+    sens: "Mandat pratique : la mission qui montre que tu maîtrises une CO. Sur ce site, chaque MP a un **mot-clé** pour le retrouver facilement."
+  - mot: "Tâches partielles"
+    sens: "Les étapes d'un mandat pratique, décrites dans le document officiel."
+  - mot: "Learnings"
+    sens: "La case où tu résumes, avec tes mots, la situation, la compétence et ce que tu en retiens."
+  - mot: "Autoévaluation"
+    sens: "La grille où tu évalues toi-même ta progression, à l'aide des items indiqués sur chaque mandat."

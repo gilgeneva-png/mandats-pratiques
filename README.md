@@ -26,6 +26,8 @@ numéro de la ligne à corriger.
 | `mandats.yml` | Toutes les données : semestre, vacances, MP, Learnings | Oui |
 | `index.html` | Page d'accueil (planning du semestre) | Non |
 | `mp.html` | Page détaillée d'un MP | Non |
+| `eval.html` | Page « Comment je suis évalué·e » | Non |
+| `evaluation.yml` | Contenu de la page évaluation | Oui |
 | `formateur.html` | Mode d'emploi formateur (non lié depuis le site) | Non |
 | `mandats-S6.yml` | Brouillon du semestre suivant (aperçu : `?fichier=mandats-S6.yml`) | Oui |
 | `assets/` | Mise en forme et fonctionnement du site | Non |

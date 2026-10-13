@@ -109,6 +109,27 @@ banque: {
   strip: true
 },
 
+/* ---------------- ARCADE ---------------- */
+arcade: {
+  hero: `<svg viewBox="0 0 200 150" aria-hidden="true" shape-rendering="crispEdges">
+    <g class="bob">
+      <path d="M40 46h120c22 0 34 18 38 44l4 26c2 14-10 22-22 16l-26-18H46l-26 18c-12 6-24-2-22-16l4-26c4-26 16-44 38-44z" fill="#2B3266" stroke="#F4F6FF" stroke-width="3"/>
+      <g fill="#F4F6FF"><rect x="42" y="68" width="12" height="36"/><rect x="30" y="80" width="36" height="12"/></g>
+      <g transform="translate(140 64) scale(1.15)"><circle r="9" fill="#12152B" stroke="#56B4E9" stroke-width="2.5"/><path d="M0-5 5 4H-5z" fill="#56B4E9"/></g>
+      <g transform="translate(160 84) scale(1.15)"><circle r="9" fill="#12152B" stroke="#E69F00" stroke-width="2.5"/><circle r="4.4" fill="none" stroke="#E69F00" stroke-width="2.2"/></g>
+      <g transform="translate(140 104) scale(1.15)"><circle r="9" fill="#12152B" stroke="#F0E442" stroke-width="2.5"/><path d="M-4-4 4 4M4-4-4 4" stroke="#F0E442" stroke-width="2.4"/></g>
+      <g transform="translate(120 84) scale(1.15)"><circle r="9" fill="#12152B" stroke="#CC79A7" stroke-width="2.5"/><rect x="-4" y="-4" width="8" height="8" fill="none" stroke="#CC79A7" stroke-width="2.2"/></g>
+      <rect x="84" y="78" width="12" height="5" fill="#AEB4D6"/><rect x="102" y="78" width="12" height="5" fill="#AEB4D6"/>
+    </g>
+    <g class="twinkle" fill="#F0E442">
+      <path d="M18 18h4v4h-4zM22 14h4v4h-4zM22 22h4v4h-4zM26 18h4v4h-4z"/>
+      <path d="M176 18h4v4h-4zM180 14h4v4h-4zM180 22h4v4h-4zM184 18h4v4h-4z" fill="#56B4E9"/>
+      <path d="M96 10h4v4h-4zM100 6h4v4h-4zM100 14h4v4h-4zM104 10h4v4h-4z" fill="#CC79A7"/>
+    </g>
+  </svg>`,
+  strip: true
+},
+
 /* ---------------- SPORT ---------------- */
 sport: {
   hero: `<svg viewBox="0 0 190 150" aria-hidden="true">

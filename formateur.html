@@ -114,6 +114,8 @@ ul{ margin:0 0 6pt; padding-left:15pt } li{ margin-bottom:2pt }
     debut: 2026-12-14
     fin: 2026-12-14</pre></td></tr>
   <tr><td>Modifier la case Learnings</td><td>Section 6 du fichier, commune à tous les MP. La question propre à chaque MP est dans <code>learnings_pistes</code>.</td></tr>
+  <tr><td>Changer le mot-clé d'un MP</td><td>La ligne <code>mot_cle: "Mes talents"</code>. C'est le nom que les apprentis voient partout (planning, page, agenda) ; le code A1, E2… reste affiché en petit. 2 à 3 mots.</td></tr>
+  <tr><td>Modifier les tâches partielles</td><td>Les lignes sous <code>taches:</code>, une par tâche, dans l'ordre du document officiel. Elles s'affichent numérotées sur la page du MP.</td></tr>
   <tr><td>Ajouter un MP</td><td>Copier un bloc MP entier (de <code>- id:</code> jusqu'au bloc suivant), le coller à la fin de la section 5, puis changer l'<code>id</code> (unique, sans espace ni accent) et le contenu.</td></tr>
   </tbody>
 </table>
@@ -164,16 +166,27 @@ ul{ margin:0 0 6pt; padding-left:15pt } li{ margin-bottom:2pt }
   <li>Un menu « Mon groupe » apparaît alors automatiquement sur le site.</li>
 </ul>
 
-<h2 class="avoid"><span class="n">7</span>Bon à savoir</h2>
+<h2 class="avoid"><span class="n">7</span>La page « Comment je suis évalué·e »</h2>
+<p>Son contenu est dans le fichier <code>evaluation.yml</code>, qui se modifie exactement comme <code>mandats.yml</code> (crayon, Commit). Il ne dépend pas du semestre.</p>
 <ul class="avoid">
-  <li><strong>Thèmes :</strong> chaque apprenti choisit l'ambiance du site (Classique, Soirée, Ferme, Plage, Banque, Sport : couleurs, police, illustrations, motifs) en haut de l'accueil ou en bas d'une page MP. Le choix reste sur son appareil et ne change rien au contenu. Rien à configurer côté formateur.</li>
+  <li><code>intro</code> : le texte d'ouverture.</li>
+  <li><code>note_officielle</code> : la barre 50 / 50 et le détail des deux blocs (<code>part</code> = pourcentage affiché).</li>
+  <li><code>sections</code> : chaque section a un <code>titre</code>, un <code>texte</code> et éventuellement des <code>points</code> (cartes), chacun avec <code>compte_dans</code> pour indiquer le critère officiel concerné.</li>
+  <li><code>glossaire</code> : les mots à connaître (DCO, CO, MP…).</li>
+</ul>
+<p>Adresse : <code>gilgeneva-png.github.io/mandats-pratiques/eval.html</code>. Elle est liée depuis l'accueil et depuis chaque page de MP.</p>
+
+<h2 class="avoid"><span class="n">8</span>Bon à savoir</h2>
+<ul class="avoid">
+  <li><strong>Thèmes :</strong> chaque apprenti choisit l'ambiance du site (Classique, Soirée, Ferme, Plage, Banque, Sport, Arcade) en haut de l'accueil ou en bas d'une page. Le choix reste sur son appareil et ne change rien au contenu.</li>
+  <li><strong>Accessibilité :</strong> le thème <strong>Arcade</strong> est conçu pour rester lisible avec un daltonisme (couleurs distinctes, un symbole de manette par MP). Le bouton <strong>Mes réglages</strong> fonctionne avec tous les thèmes : couleurs bien distinctes (avec symboles), texte plus grand, titres simples (sans police fantaisie), sans animation. Partout, le mot-clé de chaque MP est écrit sur le planning : aucune information ne passe par la couleur seule. Rien à configurer côté formateur.</li>
   <li><strong>Fichiers agenda :</strong> si une date change après qu'un apprenti a importé le fichier agenda, son agenda ne se met pas à jour. Lui demander de réimporter.</li>
   <li><strong>Checklist « Avant de rendre » :</strong> les coches restent sur le téléphone de l'apprenti. Le formateur n'y a pas accès.</li>
   <li><strong>Site public :</strong> il ne doit contenir aucun nom ni aucune donnée d'apprenti. Les PDF officiels restent protégés sur le Drive institutionnel.</li>
   <li><strong>Ouvrir index.html sur l'ordinateur ne fonctionne pas :</strong> le site ne marche qu'en ligne.</li>
 </ul>
 
-<h2 class="avoid"><span class="n">8</span>Mettre à jour le site lui-même</h2>
+<h2 class="avoid"><span class="n">9</span>Mettre à jour le site lui-même</h2>
 <p>Quand une fonction ou le design change, une archive <code>.zip</code> est livrée. Elle ne contient jamais <code>mandats.yml</code> ni les brouillons : le contenu n'est pas touché.</p>
 <ol class="steps">
   <li>Décompresser l'archive.</li>
@@ -181,7 +194,7 @@ ul{ margin:0 0 6pt; padding-left:15pt } li{ margin-bottom:2pt }
   <li>Glisser tout le contenu de l'archive d'un coup. GitHub conserve les sous-dossiers.</li>
   <li>Commit changes, puis recharger le site avec Ctrl+Maj+R.</li>
 </ol>
-<p><strong>Contenu normal de la racine du dépôt :</strong> <code>index.html</code>, <code>mp.html</code>, <code>formateur.html</code>, <code>mandats.yml</code>, les brouillons (<code>mandats-S6.yml</code>…), <code>README.md</code> et le dossier <code>assets</code>. Un fichier en trop (doublon) se supprime : l'ouvrir, « … » en haut à droite, Delete file, Commit.</p>
+<p><strong>Contenu normal de la racine du dépôt :</strong> <code>index.html</code>, <code>mp.html</code>, <code>eval.html</code>, <code>formateur.html</code>, <code>mandats.yml</code>, <code>evaluation.yml</code>, les brouillons (<code>mandats-S6.yml</code>…), <code>README.md</code> et le dossier <code>assets</code>. Un fichier en trop (doublon) se supprime : l'ouvrir, « … » en haut à droite, Delete file, Commit.</p>
 </main>
 </body>
 </html>

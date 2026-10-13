@@ -20,12 +20,60 @@ const SKINS = {
   banque:{label:"Banque", sw:["#0F1E33","#B08A2E"],
     palette:["#1B3A6B","#1F5E4A","#8A1C34","#7D5F10","#4A5A70","#5A3E7A","#2D6E7E","#6B4E2E"]},
   sport:{label:"Sport", sw:["#FFFFFF","#E11D2E"],
-    palette:["#D61A2B","#1D4ED8","#15803D","#C2410C","#111827","#7C3AED","#0E7490","#A16207"]}
+    palette:["#D61A2B","#1D4ED8","#15803D","#C2410C","#111827","#7C3AED","#0E7490","#A16207"]},
+  arcade:{label:"Arcade", sw:["#12152B","#F0E442"], dark:true, symbols:true,
+    palette:["#56B4E9","#E69F00","#F0E442","#009E73","#CC79A7","#D55E00","#FFFFFF","#3D8FD6"]}
 };
+SKINS.soiree.dark = true;
+/* Palettes « couleurs bien distinctes » (Okabe-Ito), lisibles par les personnes daltoniennes */
+const CVD_LIGHT = ["#0072B2","#D55E00","#007A5E","#A8457F","#9A6200","#1A1A1A","#2F86C0","#6E6400"];
+const CVD_DARK  = ["#56B4E9","#E69F00","#F0E442","#009E73","#CC79A7","#D55E00","#FFFFFF","#3D8FD6"];
+
+/* Réglages personnels, combinables avec n'importe quel thème */
+const PREFS_DEF = [
+  ["cvd",   "Couleurs bien distinctes", "Couleurs choisies pour rester différentes pour tout le monde, avec un symbole par mandat"],
+  ["big",   "Texte plus grand", "Agrandit tout le site"],
+  ["plain", "Titres simples", "Remplace les polices fantaisie par une police très lisible"],
+  ["still", "Sans animation", "Coupe tous les mouvements"]
+];
+let PREFS = {};
+try{ PREFS = JSON.parse(localStorage.getItem("mp-prefs") || "{}") || {}; }catch(e){ PREFS = {}; }
+function applyPrefs(){
+  const r = document.documentElement;
+  PREFS_DEF.forEach(([k]) => { if (PREFS[k]) r.setAttribute("data-"+k, ""); else r.removeAttribute("data-"+k); });
+  if (useSymbols()) r.setAttribute("data-symbols",""); else r.removeAttribute("data-symbols");
+}
+const useSymbols = () => !!(SKINS[SKIN].symbols || PREFS.cvd);
 let SKIN = "classique";
 try{ const k = localStorage.getItem("mp-theme"); if (SKINS[k]) SKIN = k; }catch(e){}
 document.documentElement.dataset.skin = SKIN;
-const palette = () => SKINS[SKIN].palette;
+const palette = () => PREFS.cvd ? (SKINS[SKIN].dark ? CVD_DARK : CVD_LIGHT) : SKINS[SKIN].palette;
+applyPrefs();
+
+/* Texte lisible sur une couleur de fond donnée */
+function onColor(hex){
+  const h = String(hex).replace("#",""); if (h.length !== 6) return "#FFFFFF";
+  const ch = i => { const c = parseInt(h.slice(i,i+2),16)/255; return c <= .03928 ? c/12.92 : Math.pow((c+.055)/1.055, 2.4); };
+  const L = .2126*ch(0) + .7152*ch(2) + .0722*ch(4);
+  return L > .36 ? "#12152B" : "#FFFFFF";
+}
+/* Symboles de manette : un par mandat, pour ne jamais dépendre de la couleur seule */
+const SYMS = [
+  '<path d="M8 1.6 15 14.4H1z"/>',
+  '<circle cx="8" cy="8" r="6.4"/>',
+  '<path d="M2.2 4.6 4.6 2.2 8 5.6l3.4-3.4 2.4 2.4L10.4 8l3.4 3.4-2.4 2.4L8 10.4l-3.4 3.4-2.4-2.4L5.6 8z"/>',
+  '<rect x="2" y="2" width="12" height="12"/>',
+  '<path d="M8 .8l2.1 4.6 5 .5-3.8 3.4 1.1 4.9L8 11.7l-4.4 2.5 1.1-4.9L.9 5.9l5-.5z"/>',
+  '<path d="M8 .8 15.2 8 8 15.2.8 8z"/>',
+  '<path d="M5.8 1.2h4.4v4.6h4.6v4.4h-4.6v4.6H5.8v-4.6H1.2V5.8h4.6z"/>',
+  '<path d="M4.3 1.6h7.4L15.4 8l-3.7 6.4H4.3L.6 8z"/>'
+];
+function sym(m, extra=""){
+  if (!useSymbols()) return "";
+  return `<svg class="sym ${extra}" viewBox="0 0 16 16" aria-hidden="true" fill="currentColor">${SYMS[m.index % SYMS.length]}</svg>`;
+}
+const kw = m => hasTextLoose(m.mot_cle) ? m.mot_cle : String(m.co||"").toUpperCase();
+function hasTextLoose(v){ return typeof v === "string" && v.trim() !== ""; }
 const FORMATS = {
   officiel:"Consigne officielle", journal:"Journal de bord",
   outil:"Outil à créer", retour:"Retour d'expérience"
@@ -110,28 +158,27 @@ function keepDraftInLinks(){
 }
 
 /* ---------- Chargement des données ---------- */
-async function load(){
+async function fetchYaml(name){
   let txt;
   try{
-    const r = await fetch(SRC + "?v=" + Date.now(), {cache:"no-store"});
+    const r = await fetch(name + "?v=" + Date.now(), {cache:"no-store"});
     if (!r.ok) throw new Error("HTTP " + r.status);
     txt = await r.text();
   }catch(e){
-    throw {title:`Le fichier ${SRC} est introuvable`,
+    throw {title:`Le fichier ${name} est introuvable`,
       detail:"Vérifie qu'il se trouve bien à côté de index.html, avec ce nom exact.\n(" + e.message + ")"};
   }
-  let data;
-  try{ data = jsyaml.load(txt); }
+  try{ return jsyaml.load(txt) || {}; }
   catch(e){
     const line = e.mark ? e.mark.line + 1 : "?";
-    throw {title:`Erreur dans ${SRC}, ligne ${line}`,
+    throw {title:`Erreur dans ${name}, ligne ${line}`,
       detail:"Le site ne peut pas lire le fichier maître. Causes les plus fréquentes :\n" +
         "– une tabulation au lieu d'espaces, ou un décalage d'indentation ;\n" +
         "– un texte contenant « : » ou « # » sans guillemets ;\n" +
         "– un guillemet ouvert et pas refermé.\n\nMessage technique : " + (e.reason || e.message)};
   }
-  return normalize(data || {});
 }
+async function load(){ return normalize(await fetchYaml(SRC)); }
 
 function normalize(d){
   const site = d.site || {}, sem = d.semestre || {};
@@ -141,7 +188,8 @@ function normalize(d){
   const limit = toDate(sem.dernier_rendu);
   const mps = asList(d.mandats).map((m,i) => {
     if (!m.id) warnings.push(`Le MP n°${i+1} (« ${m.titre || "sans titre"} ») n'a pas d'id.`);
-    return Object.assign({}, m, {color: m.couleur || palette()[i % palette().length], index:i});
+    const color = m.couleur || palette()[i % palette().length];
+    return Object.assign({}, m, {color, on:onColor(color), index:i});
   });
   return {
     site, warnings, groups, limit,
@@ -190,7 +238,7 @@ function buildIcs(data, items, g){
   for (const mp of items){
     if (!mp.reddition) continue;
     const url = `${base}mp.html?id=${encodeURIComponent(mp.id)}&g=${encodeURIComponent(g)}`;
-    const title = `Rendu MP ${(mp.co||"").toUpperCase()} – ${mp.titre}`;
+    const title = `Rendu MP : ${kw(mp)} (${String(mp.co||"").toUpperCase()})`;
     L.push("BEGIN:VEVENT",
       `UID:${mp.id}-${g}@mandats-pratiques`,
       `DTSTAMP:${stamp}`,
@@ -220,6 +268,7 @@ function downloadIcs(name, text){
 
 const ICON_CAL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4M12 13v5M9.5 15.5h5"/></svg>';
 const ICON_DOC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>';
+const ICON_EVAL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l2.5 2.5L16 9"/><rect x="4" y="3" width="16" height="18" rx="3"/></svg>';
 const ICON_LINK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"/></svg>';
 
 /* ---------- Éléments communs ---------- */
@@ -238,17 +287,22 @@ function decoHero(){
   const d = window.MP_DECO && window.MP_DECO[SKIN];
   return d ? `<div class="deco deco-hero" aria-hidden="true">${d.hero}</div>` : "";
 }
+let prefsOpen = false;
 function themePicker(){
   return `<div class="skins" role="group" aria-label="Thème du site"><span class="skins-k">Thème</span>${
     Object.entries(SKINS).map(([k,v]) => `<button type="button" class="skin${k===SKIN?" on":""}" data-skin="${k}" aria-pressed="${k===SKIN}">
-      <i style="--a:${v.sw[0]};--b:${v.sw[1]}"></i>${v.label}</button>`).join("")}</div>`;
+      <i style="--a:${v.sw[0]};--b:${v.sw[1]}"></i>${v.label}</button>`).join("")}
+    <details class="prefs"${prefsOpen?" open":""}><summary>Mes réglages${Object.values(PREFS).filter(Boolean).length ? ` (${Object.values(PREFS).filter(Boolean).length})` : ""}</summary>
+      <div class="prefs-box">${PREFS_DEF.map(([k,t,d]) => `<label class="pref"><input type="checkbox" data-pref="${k}"${PREFS[k]?" checked":""}><span><b>${t}</b><small>${d}</small></span></label>`).join("")}
+      <p class="prefs-note">Ces réglages restent sur cet appareil et marchent avec tous les thèmes.</p></div>
+    </details></div>`;
 }
 function footer(data){
   const s = data.site;
   const bits = [];
   if (hasText(s.formateur)) bits.push(`Formateur : ${esc(s.formateur)}`);
   if (hasText(s.contact)) bits.push(`<a href="mailto:${esc(s.contact)}">${esc(s.contact)}</a>`);
-  return `<footer class="foot wrap">${document.body.dataset.page === "mp" ? themePicker() : ""}${bits.join("<br>")}</footer>`;
+  return `<footer class="foot wrap">${document.body.dataset.page !== "home" ? themePicker() : ""}${bits.join("<br>")}</footer>`;
 }
 function showError(err){
   const t = err && err.title ? err : {title:"Erreur inattendue", detail:String(err && err.message || err)};
@@ -287,9 +341,10 @@ function renderHome(data){
       : next.color;
     const what = same.length > 1
       ? `<p class="kicker">Prochains rendus : ${same.length} mandats le même jour</p>
-         <ul class="next-list">${same.map(m=>`<li style="--c:${m.color}"><a href="${link(m)}"><span class="co">${esc((m.co||"").toUpperCase())}</span>${esc(m.titre)}</a></li>`).join("")}</ul>`
+         <ul class="next-list">${same.map(m=>`<li style="--c:${m.color};--on-c:${m.on}"><a href="${link(m)}"><span class="co">${sym(m)}${esc(kw(m))}</span><span class="nt">${esc(m.titre)}</span></a></li>`).join("")}</ul>`
       : `<p class="kicker">Prochain rendu</p>
-         <h2><a href="${link(next)}">${esc(next.titre)}</a></h2>`;
+         <h2><a href="${link(next)}">${sym(next,"big")}${esc(kw(next))}</a></h2>
+         <p class="next-title">${esc(next.titre)}</p>`;
     const others = mps.filter(m => m.reddition && m.reddition > next.reddition && m.debut && m.debut <= now);
     hero = `<section class="next${same.length>1?" multi":""}${decoHero()?" has-deco":""}" style="--c:${next.color};--bar:${bar}" aria-label="Prochain rendu">
       <div class="days">${n}<small>${n===1?"jour":"jours"}</small></div>
@@ -300,7 +355,7 @@ function renderHome(data){
       ${same.length === 1 ? `<div class="actions"><a class="btn solid" href="${link(next)}">Voir la consigne</a></div>` : ""}
       ${decoHero()}
     </section>
-    ${others.length ? `<div class="also"><span class="also-k">Aussi en cours</span>${others.map(m=>`<a class="also-mp" style="--c:${m.color}" href="${link(m)}"><i></i>${esc((m.co||"").toUpperCase())}, rendu le ${fmtShort(m.reddition)}</a>`).join("")}</div>` : ""}`;
+    ${others.length ? `<div class="also"><span class="also-k">Aussi en cours</span>${others.map(m=>`<a class="also-mp" style="--c:${m.color}" href="${link(m)}">${useSymbols() ? sym(m) : "<i></i>"}${esc(kw(m))}, rendu le ${fmtShort(m.reddition)}</a>`).join("")}</div>` : ""}`;
   } else if (dated.length){
     hero = `<section class="next done" style="--c:var(--ink)"><div class="what"><h2>Tous les mandats du semestre sont rendus.</h2>
       <p class="when">Prochaine étape : les entretiens d'évaluation.</p></div></section>`;
@@ -317,7 +372,7 @@ function renderHome(data){
     ${hero}
     <div class="section-head">
       <h2>Le semestre</h2>
-      <div class="actions"><button class="btn" id="ics-all">${ICON_CAL}Tous les rendus dans mon agenda</button></div>
+      <div class="actions"><a class="btn" href="eval.html">${ICON_EVAL}Comment je suis évalué·e</a><button class="btn" id="ics-all">${ICON_CAL}Tous les rendus dans mon agenda</button></div>
     </div>
     ${gantt(data, mps, g, now)}
     ${mobileList(data, mps, g, now)}
@@ -334,7 +389,8 @@ function gantt(data, mps, g, now){
   const t0 = weekStart(data.start);
   const t1 = new Date(+weekStart(data.end) + 7*DAY);
   const total = daysBetween(t0, t1);
-  const pct = d => (Math.max(0, Math.min(total, daysBetween(t0, d))) / total * 100).toFixed(3) + "%";
+  const num = d => Math.max(0, Math.min(total, daysBetween(t0, d))) / total * 100;
+  const pct = d => num(d).toFixed(3) + "%";
   const inRange = d => d >= t0 && d <= t1;
 
   let months = "", weeks = "", cols = "";
@@ -364,17 +420,21 @@ function gantt(data, mps, g, now){
   const todayLine = inRange(now) ? `<div class="g-today" style="left:${pct(now)}"><span>Aujourd'hui</span></div>` : "";
 
   const names = mps.map(mp => `<div class="g-row"><a class="g-name" style="--c:${mp.color}" href="mp.html?id=${encodeURIComponent(mp.id)}&g=${g}">
-      <span class="dot"></span><span class="t"><span class="co">${esc((mp.co||"").toUpperCase())}</span><span class="tt">${esc(mp.titre)}</span></span></a></div>`).join("");
+      ${useSymbols() ? sym(mp,"dot-sym") : '<span class="dot"></span>'}<span class="t"><span class="kw">${esc(kw(mp))}</span><span class="tt">${esc(String(mp.co||"").toUpperCase())} · ${esc(mp.titre)}</span></span></a></div>`).join("");
   const bars = mps.map(mp => {
     if (!mp.reddition) return `<div class="g-bar-row"></div>`;
     const end = new Date(+mp.reddition + DAY);
     const startD = mp.debut && mp.debut < mp.reddition ? mp.debut : null;
     const past = mp.reddition < now ? " past" : "";
-    const label = `${mp.titre}, rendu le ${fmtLong(mp.reddition)}`;
+    const label = `${kw(mp)} : ${mp.titre}, rendu le ${fmtLong(mp.reddition)}`;
     const href = `mp.html?id=${encodeURIComponent(mp.id)}&g=${g}`;
-    return startD
-      ? `<div class="g-bar-row"><a class="g-bar${past}" style="--c:${mp.color};left:${pct(startD)};width:calc(${pct(end)} - ${pct(startD)})" href="${href}" title="${esc(label)}" aria-label="${esc(label)}"><span class="pin"></span></a></div>`
-      : `<div class="g-bar-row"><a class="g-bar milestone${past}" style="--c:${mp.color};left:calc(${pct(end)} - 30px)" href="${href}" title="${esc(label)}" aria-label="${esc(label)}"><span class="pin"></span></a></div>`;
+    const pin = `<span class="pin">${sym(mp,"pin-sym")}</span>`;
+    /* Le mot-clé est écrit sur la barre si elle est assez longue, sinon à côté */
+    const sN = startD ? num(startD) : num(end) - 2.6, eN = num(end), w = eN - sN;
+    const place = w >= 17 ? "in" : (eN <= 72 ? "right" : "left");
+    const txt = `<span class="g-lab g-lab-${place}">${esc(kw(mp))}</span>`;
+    const style = `--c:${mp.color};--on-c:${mp.on};left:${sN.toFixed(3)}%;width:${w.toFixed(3)}%`;
+    return `<div class="g-bar-row"><a class="g-bar${startD?"":" milestone"}${past}" style="${style}" href="${href}" title="${esc(label)}" aria-label="${esc(label)}">${place==="in"?txt:""}${pin}</a>${place!=="in"?`<span class="g-lab-out g-lab-${place}" style="${place==="right"?`left:calc(${eN.toFixed(3)}% + 8px)`:`right:calc(${(100-sN).toFixed(3)}% + 8px)`}">${esc(kw(mp))}</span>`:""}</div>`;
   }).join("");
 
   return `<section class="gantt" aria-label="Planning du semestre">
@@ -409,7 +469,7 @@ function mobileList(data, mps, g, now){
       const mp = it.mp, n = daysBetween(now, mp.reddition);
       return `<li><a class="l-mp${n<0?" past":""}" style="--c:${mp.color}" href="mp.html?id=${encodeURIComponent(mp.id)}&g=${g}">
         <span class="l-date"><b>${mp.reddition.getUTCDate()}</b><small>${MOIS_COURT[mp.reddition.getUTCMonth()]}</small></span>
-        <span><span class="co">${esc((mp.co||"").toUpperCase())}</span><span class="t">${esc(mp.titre)}</span>
+        <span><span class="t">${sym(mp)}${esc(kw(mp))}</span><span class="co">${esc(String(mp.co||"").toUpperCase())} · ${esc(mp.titre)}</span>
         <span class="muted" style="font-size:14px;color:var(--ink-soft)">Rendu ${inDays(n)}</span></span></a></li>`;
     }
     if (it.k === "limit") return `<li class="l-limit">Dernier rendu du semestre : ${fmtLong(data.limit)}</li>`;
@@ -434,8 +494,9 @@ function renderMp(data){
   const mp = forGroup(raw, g);
   const now = today();
   const s = data.site;
-  document.title = `${mp.titre} – ${s.titre || "Mandats pratiques"}`;
+  document.title = `${kw(mp)} – ${s.titre || "Mandats pratiques"}`;
   document.documentElement.style.setProperty("--c", mp.color);
+  document.documentElement.style.setProperty("--on-c", mp.on);
 
   const n = mp.reddition ? daysBetween(now, mp.reddition) : null;
   const pdf = hasText(mp.pdf_officiel) ? mp.pdf_officiel : (hasText(s.dossier_pdf) ? s.dossier_pdf : "");
@@ -450,6 +511,9 @@ function renderMp(data){
 
   const blocks = [];
   if (hasText(mp.mission_terrain)) blocks.push(block("Ta mission", `<div class="prose">${md(mp.mission_terrain)}</div>`));
+  const tp = asList(mp.taches);
+  if (tp.length) blocks.push(block("Les tâches partielles", `<p class="muted">Résumé du document officiel. Chaque tâche partielle doit apparaître dans ce que tu rends.</p>
+    <ol class="tasks">${tp.map(x=>`<li>${inline(x)}</li>`).join("")}</ol>`));
   const liv = asList(mp.livrables);
   if (liv.length) blocks.push(block("À déposer sur Konvink", `<ul>${liv.map(x=>`<li>${inline(x)}</li>`).join("")}</ul>`));
 
@@ -503,6 +567,7 @@ function renderMp(data){
         ${hasText(mp.mp_officiel) ? `<span class="chip">${esc(mp.mp_officiel)}</span>` : ""}
         ${FORMATS[mp.format] ? `<span class="chip">${FORMATS[mp.format]}</span>` : ""}
       </div>
+      <p class="kw-big">${sym(mp,"big")}${esc(kw(mp))}</p>
       <h1>${esc(mp.titre)}</h1>
       ${hasText(mp.co_titre) ? `<p class="co-line">${esc(mp.co_titre)}</p>` : ""}
       ${hasText(mp.en_bref) ? `<div class="lead">${md(mp.en_bref)}</div>` : ""}
@@ -515,12 +580,61 @@ function renderMp(data){
       ${mp.reddition ? `<button class="btn" id="ics-one">${ICON_CAL}Ajouter à mon agenda</button>` : ""}
     </div>
     ${blocks.join("")}
+    <p class="actions" style="margin-top:6px"><a class="btn" href="eval.html">${ICON_EVAL}Comment je suis évalué·e</a></p>
   </main>
   ${footer(data)}`;
 
   const b = $("#ics-one");
   if (b) b.addEventListener("click", () => downloadIcs(`mp-${mp.id}.ics`, buildIcs(data, [mp], g)));
   bindChecklist(`mp-check-${mp.id}`, ck.length);
+}
+
+/* ==========================================================
+   PAGE « COMMENT JE SUIS ÉVALUÉ·E » (contenu : evaluation.yml)
+   ========================================================== */
+function renderEval(data){
+  const ev = data.evaluation || {}, s = data.site;
+  const g = currentGroup(data);
+  const c0 = palette()[0];
+  document.title = `${ev.titre || "Évaluation"} – ${s.titre || "Mandats pratiques"}`;
+  document.documentElement.style.setProperty("--c", c0);
+  document.documentElement.style.setProperty("--on-c", onColor(c0));
+  const out = [];
+  const no = ev.note_officielle;
+  if (no){
+    const parts = asList(no.blocs);
+    out.push(block(esc(no.titre || "La note du semestre"), `
+      ${hasText(no.texte) ? `<div class="prose">${md(no.texte)}</div>` : ""}
+      <div class="split" role="img" aria-label="${esc(parts.map(p=>`${p.nom} ${p.part} %`).join(", "))}">${parts.map((p,i) => {
+        const col = palette()[i % palette().length];
+        return `<div class="split-part" style="flex:${Number(p.part)||1};--c:${col};--on-c:${onColor(col)}"><b>${esc(p.part)} %</b><span>${esc(p.nom)}</span></div>`;
+      }).join("")}</div>
+      <div class="split-detail">${parts.map((p,i) => `<div class="split-col" style="--c:${palette()[i % palette().length]}">
+        <h3>${esc(p.nom)}</h3>${hasText(p.detail) ? `<p>${inline(p.detail)}</p>` : ""}
+        ${asList(p.criteres).length ? `<ul class="crit">${asList(p.criteres).map(x=>`<li>${inline(x)}</li>`).join("")}</ul>` : ""}</div>`).join("")}</div>`));
+  }
+  for (const sec of asList(ev.sections)){
+    const pts = asList(sec.points);
+    out.push(block(esc(sec.titre || ""), `
+      ${hasText(sec.texte) ? `<div class="prose">${md(sec.texte)}</div>` : ""}
+      ${pts.length ? `<div class="points">${pts.map(p => `<div class="point">
+        <h3>${inline(p.titre || "")}</h3>${hasText(p.texte) ? `<div class="prose">${md(p.texte)}</div>` : ""}
+        ${asList(p.compte_dans).length ? `<p class="counts">Compte dans : ${asList(p.compte_dans).map(x=>`<span class="tag">${esc(x)}</span>`).join(" ")}</p>` : ""}</div>`).join("")}</div>` : ""}`));
+  }
+  const gl = asList(ev.glossaire);
+  if (gl.length) out.push(block(esc(ev.glossaire_titre || "Les mots à connaître"),
+    `<dl class="gloss">${gl.map(x => `<div><dt>${esc(x.mot)}</dt><dd>${inline(x.sens || "")}</dd></div>`).join("")}</dl>`));
+
+  document.body.innerHTML = `
+  <main class="wrap narrow">
+    <a class="back" href="./?g=${g}">Retour au semestre</a>
+    <header class="mp-head${decoHero()?" has-deco":""}">${decoHero()}
+      <h1>${esc(ev.titre || "Comment je suis évalué·e")}</h1>
+      ${hasText(ev.intro) ? `<div class="lead">${md(ev.intro)}</div>` : ""}
+    </header>
+    ${out.join("")}
+  </main>
+  ${footer(data)}`;
 }
 
 function block(title, inner){ return `<section class="block"><h2>${title}</h2>${inner}</section>`; }
@@ -541,9 +655,13 @@ function bindChecklist(key, total){
 }
 
 /* ---------- Lancement ---------- */
+function recolor(data){
+  data.mps.forEach((m,i) => { if (!m.couleur) m.color = palette()[i % palette().length]; m.on = onColor(m.color); });
+}
 function render(data){
   const y = window.scrollY;
-  if (document.body.dataset.page === "mp") renderMp(data); else renderHome(data);
+  const page = document.body.dataset.page;
+  if (page === "mp") renderMp(data); else if (page === "eval") renderEval(data); else renderHome(data);
   const d = window.MP_DECO && window.MP_DECO[SKIN];
   if (d && d.strip) document.body.insertAdjacentHTML("afterbegin", '<div class="deco-strip" aria-hidden="true"></div>');
   keepDraftInLinks();
@@ -551,15 +669,23 @@ function render(data){
     SKIN = b.dataset.skin;
     try{ localStorage.setItem("mp-theme", SKIN); }catch(e){}
     document.documentElement.dataset.skin = SKIN;
-    data.mps.forEach((m,i) => { if (!m.couleur) m.color = palette()[i % palette().length]; });
-    render(data);
+    applyPrefs(); recolor(data); render(data);
     window.scrollTo(0, y);
     const again = document.querySelector(`.skin[data-skin="${SKIN}"]`); if (again) again.focus();
+  }));
+  document.querySelectorAll(".prefs").forEach(dt => dt.addEventListener("toggle", () => { prefsOpen = dt.open; }));
+  document.querySelectorAll("[data-pref]").forEach(c => c.addEventListener("change", () => {
+    const k = c.dataset.pref; PREFS[k] = c.checked;
+    try{ localStorage.setItem("mp-prefs", JSON.stringify(PREFS)); }catch(e){}
+    prefsOpen = true; applyPrefs(); recolor(data);
+    const yy = window.scrollY; render(data); window.scrollTo(0, yy);
+    const again = document.querySelector(`[data-pref="${k}"]`); if (again) again.focus();
   }));
 }
 document.addEventListener("DOMContentLoaded", async () => {
   try{
     const data = await load();
+    if (document.body.dataset.page === "eval") data.evaluation = await fetchYaml("evaluation.yml");
     render(data);
   }catch(e){ console.error(e); showError(e); }
 });
