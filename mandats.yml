@@ -162,7 +162,7 @@ mandats:
     statut: valide
     dates:
       g1: { debut: 2026-09-01, reddition: 2026-09-29 }   # À CORRIGER
-    pdf_officiel: ""
+    pdf_officiel: "https://drive.google.com/file/d/1L6fb-T96Dr_-GqL3TBx3v1BeFgg9vMVs/view?usp=drive_link"
 
     en_bref: |
       Un MP introspectif : tu fais le point sur toi, tes talents,
@@ -241,7 +241,7 @@ mandats:
     statut: valide
     dates:
       g1: { debut: 2026-10-12, reddition: 2026-12-18 }   # À CORRIGER (dure tout le semestre)
-    pdf_officiel: ""
+    pdf_officiel: "https://drive.google.com/file/d/14n7AI-Y8aeKkeSpVuC1wB8o-sKcmHA-6/view?usp=drive_link"
 
     en_bref: |
       L'outil de réception de mandat créé par l'équipe, utilisé tout
@@ -323,7 +323,7 @@ mandats:
     statut: valide
     dates:
       g1: { debut: 2026-08-18, reddition: 2026-09-22 }   # À CORRIGER
-    pdf_officiel: ""
+    pdf_officiel: "https://drive.google.com/file/d/1YK5hv1RPtiCiE-rYTaXLFutfPbHvRh2g/view?usp=drive_link"
 
     en_bref: |
       Tu as fait beaucoup de recherches sur des entreprises/associations :
@@ -403,7 +403,7 @@ mandats:
     statut: valide
     dates:
       g1: { debut: 2026-10-12, reddition: 2026-10-27 }   # À CORRIGER
-    pdf_officiel: ""
+    pdf_officiel: "https://drive.google.com/file/d/1Wj0ct6Z86MY_qamvDnzt6Xc2N5AB9XuP/view?usp=drive_link"
 
     en_bref: |
       Le calendrier de ton mandat de transfert : tu le crées, tu le
@@ -483,7 +483,7 @@ mandats:
     statut: valide
     dates:
       g1: { debut: 2026-10-13, reddition: 2026-12-22 }   # À CORRIGER
-    pdf_officiel: ""
+    pdf_officiel: "https://drive.google.com/file/d/1kkZFog-Tdnac_MAxk22p7uMXYGQUDV1j/view?usp=drive_link"
 
     en_bref: |
       Tu vas présenter l'équipe et ses prestations à de vrais clients.
@@ -568,7 +568,7 @@ mandats:
     statut: proposition
     dates:
       g1: { debut: 2026-10-13, reddition: 2026-12-22 }   # À CORRIGER
-    pdf_officiel: ""
+    pdf_officiel: "https://drive.google.com/file/d/1zhgCccSmLLiO1Reti94KHnvywmzMtaHR/view?usp=drive_link"
 
     en_bref: |
       Un mandat réel à plusieurs étapes : tu rassembles les bonnes
@@ -647,7 +647,7 @@ mandats:
     statut: proposition
     dates:
       g1: { debut: 2026-10-12, reddition: 2026-10-27 }   # À CORRIGER (4 semaines de pratique)
-    pdf_officiel: ""
+    pdf_officiel: "https://drive.google.com/file/d/1e9vMIJRgsu-HgYm9evYUaG5JtpQlOsBq/view?usp=drive_link"
 
     en_bref: |
       Tu travailles avec des logiciels et des bases de données
