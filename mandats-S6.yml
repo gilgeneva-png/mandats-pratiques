@@ -35,8 +35,8 @@ site:
   titre: "Mes mandats pratiques"
   sous_titre: "Semestre de printemps 2026-2027"
   formateur: "Gil Charmillot"
-  dossier_pdf: "https://drive.google.com/drive/folders/10L7ue6DgFDUVYngzcpiG0ArCfbus76du?usp=drive_link"
-                         # lien utilisé si un MP n'a pas son propre pdf_officiel
+  dossier_pdf: ""         # À REMPLIR : lien du dossier Drive des MP du semestre 6
+                           # (utilisé si un MP n'a pas son propre pdf_officiel)
   contact: ""            # email affiché en pied de page (laisser vide = rien affiché)
   rappels_agenda: [7, 1] # alertes dans le fichier agenda : X jours avant la reddition
 
@@ -117,11 +117,13 @@ calendrier:
 
 # ---------------------------------------------------------------------
 #  5. LES MANDATS PRATIQUES — SEMESTRE 6
-#  Squelettes préremplis depuis la grille « Semestre 6 » :
-#  titre, CO, items d'autoévaluation, questions directrices, lien Konvink.
-#  À COMPLÉTER : dates, mission_terrain, livrables, learnings_pistes,
-#  niveau_cfc, théorie, pièges, checklist.
-#  Tous en statut « proposition » tant que non validés.
+#  Rempli depuis les PDF officiels et la grille « Semestre 6 ».
+#  Consigne par défaut : suivre les tâches partielles du document.
+#  À ADAPTER : dates, mission_terrain (si tu veux une consigne
+#  propre à l'équipe), puis passer statut à « valide ».
+#
+#  mot_cle  : 2-3 mots qui parlent aux apprentis
+#  taches   : les tâches partielles du document officiel, résumées
 # ---------------------------------------------------------------------
 mandats:
 
@@ -131,6 +133,12 @@ mandats:
     co: a2
     co_titre: "Développer et utiliser des réseaux propres au domaine commercial"
     mp_officiel: "A2 – MP03"
+    mot_cle: "Profil pro en ligne"
+    taches:
+      - "Observer les profils et publications de collègues de l'école, de personnes de l'entreprise et d'autres sociétés."
+      - "Comparer avec ton propre profil professionnel et réfléchir à comment l'améliorer."
+      - "Publier une nouvelle contribution ou mettre à jour ton profil."
+      - "Documenter et analyser tes résultats."
     format: officiel
     statut: proposition
     dates:
@@ -138,35 +146,60 @@ mandats:
     pdf_officiel: ""
 
     en_bref: |
-      À compléter.
+      Ton image professionnelle en ligne : tu observes, tu compares,
+      tu améliores ton profil.
 
     mission_terrain: |
-      À compléter.
+      Suis les **tâches partielles du document officiel**, dans l'ordre.
+      Ton profil doit rester **professionnel, authentique et
+      compréhensible** pour les personnes de la branche. Ne copie pas
+      les autres : reste toi-même.
 
     livrables:
+      - "Ton analyse de 2 ou 3 profils observés : ce qui marche, ce qui ne marche pas"
+      - "Ton profil avant / après (captures) ou ta nouvelle publication"
       - "Ta case Learnings"
 
-    learnings_pistes: []
+    learnings_pistes:
+      - "Qu'est-ce qu'un recruteur doit comprendre de toi en 10 secondes sur ton profil ?"
 
     grille_autoeval: "DCO A — École"
     items_autoeval: [7]
     questions_directrices: |
-      Est-ce que je me positionne de façon appropriée au sein du réseau professionnel ? (image pro, langage, points forts, centres d'intérêt)
+      Est-ce que je me positionne de façon appropriée au sein du réseau
+      professionnel ? (image pro, langage, points forts, centres d'intérêt)
 
     niveau_cfc:
-      insuffisant: []
-      acquis: []
-      maitrise: []
+      insuffisant:
+        - "Profil inchangé ou modifié sans réflexion"
+        - "Contenu privé ou inadapté à la branche"
+      acquis:
+        - "Améliorations justifiées par l'observation d'autres profils"
+        - "Profil professionnel, authentique et à jour"
+      maitrise:
+        - "Publication pertinente pour la branche, qui valorise une expérience réelle"
+        - "Cohérence entre profil, CV et projet professionnel"
 
     theorie_essentiel: |
+      Un profil professionnel répond à trois questions : **qui tu es**
+      (formation, rôle), **ce que tu sais faire** (expériences, points
+      forts) et **ce qui t'intéresse** dans ta branche.
+      Tout ce qui est publié reste visible : relis-toi comme si ton
+      futur employeur lisait.
 
     liens_theorie:
       - titre: "Konvink — Construire un réseau professionnel"
         url: "https://app.konvink.ch/Institution/126/30952/2/StorageItem/17018/24296?isPreview=False"
 
-    pieges: []
+    pieges:
+      - "Copier le profil de quelqu'un d'autre"
+      - "Mélanger profil privé et profil professionnel"
+
     avant_de_rendre:
+      - "J'ai observé et comparé au moins deux profils"
+      - "Mon profil ou ma publication est en ligne"
       - "J'ai rempli l'autoévaluation, item 7"
+
 
   # ===================================================================
   - id: b3-opinion
@@ -174,6 +207,13 @@ mandats:
     co: b3
     co_titre: "Participer aux discussions économiques"
     mp_officiel: "B3 – MP01"
+    mot_cle: "Actu économique"
+    taches:
+      - "Parcourir l'actualité (économie, politique, écologie, société) et noter les sujets qui influencent ton quotidien."
+      - "Choisir les sujets qui touchent ton entreprise ou ta branche, les approfondir et consigner tes recherches dans un aperçu."
+      - "Évaluer leur influence sur l'entreprise, la branche ou ton quotidien à l'aide de 3 à 5 questions."
+      - "Recueillir l'opinion de proches ou de collègues, lister les positions et arguments, et situer ta propre position."
+      - "Documenter et analyser tes résultats."
     format: officiel
     statut: proposition
     dates:
@@ -181,15 +221,23 @@ mandats:
     pdf_officiel: ""
 
     en_bref: |
-      À compléter.
+      Un sujet d'actualité, son impact sur le terrain, les opinions des
+      autres, et la tienne, argumentée.
 
     mission_terrain: |
-      À compléter.
+      Suis les **tâches partielles du document officiel**, dans l'ordre.
+      Choisis un sujet qui touche vraiment les associations sportives ou
+      culturelles avec lesquelles travaille l'équipe : c'est là que ton
+      opinion aura du poids.
 
     livrables:
+      - "Ton aperçu de recherche, avec les sources"
+      - "Tes 3 à 5 questions d'impact et tes réponses"
+      - "Le tableau des positions et arguments, et ta propre position justifiée"
       - "Ta case Learnings"
 
-    learnings_pistes: []
+    learnings_pistes:
+      - "Ton opinion a-t-elle changé en écoutant les autres ? Pourquoi ?"
 
     grille_autoeval: "DCO B — Entreprise"
     items_autoeval: [6, 7]
@@ -198,42 +246,78 @@ mandats:
       Suis-je capable de me forger ma propre opinion sur un sujet de manière fondée ?
 
     niveau_cfc:
-      insuffisant: []
-      acquis: []
-      maitrise: []
+      insuffisant:
+        - "Résumé d'article sans lien avec l'entreprise"
+        - "Opinion sans argument, ou reprise de celle d'un autre"
+      acquis:
+        - "Sources vérifiées et citées"
+        - "Impact sur l'entreprise ou la branche clairement expliqué"
+        - "Position personnelle argumentée"
+      maitrise:
+        - "Compare plusieurs positions avec nuance, y compris éthique"
+        - "Anticipe des conséquences concrètes pour l'équipe ou ses clients"
 
     theorie_essentiel: |
+      **Fait, analyse, opinion** : trois choses différentes.
+      - Le fait : ce qui s'est passé, vérifiable.
+      - L'analyse : ce que ça change, pour qui.
+      - L'opinion : ta position, appuyée sur des arguments.
+      Une opinion fondée tient compte des autres points de vue, et ne se
+      contente pas de reprendre celui de la personne la plus âgée ou la
+      plus haut placée.
 
     liens_theorie:
       - titre: "Konvink — Interpréter les développements économiques"
         url: "https://app.konvink.ch/Institution/126/31135/2/StorageItem/17024/26964?isPreview=False"
 
-    pieges: []
+    pieges:
+      - "Choisir un sujet trop vaste (« l'inflation dans le monde »)"
+      - "Ne citer aucune source"
+
     avant_de_rendre:
-      - "J'ai rempli l'autoévaluation, items 6, 7"
+      - "Chaque information a sa source"
+      - "J'explique l'impact sur l'entreprise ou la branche"
+      - "Ma position est argumentée"
+      - "J'ai rempli l'autoévaluation, items 6 et 7"
+
 
   # ===================================================================
   - id: c3-optimiser
-    titre: "Optimiser les processus"
+    titre: "Optimiser des processus"
     co: c3
     co_titre: "Documenter, coordonner et mettre en œuvre des processus en entreprise"
     mp_officiel: "C3 – MP02"
+    mot_cle: "Améliorer un processus"
+    taches:
+      - "Repérer un processus de ton quotidien qui pourrait être plus simple, plus efficace, ou où il y a souvent des erreurs ou des pertes de temps."
+      - "Analyser le processus en entier, identifier les étapes à optimiser selon des critères (coûts, erreurs, temps, technologies) et formuler au moins une proposition."
+      - "Discuter de la faisabilité avec ton responsable et, avec son feu vert, mettre la proposition en œuvre."
+      - "Pendant quatre semaines, exécuter ou observer le processus optimisé et vérifier s'il fonctionne mieux."
+      - "Documenter et analyser tes résultats."
     format: officiel
     statut: proposition
     dates:
-      g1: { debut: 2027-02-22, reddition: 2027-04-30 }   # À CORRIGER
+      g1: { debut: 2027-02-22, reddition: 2027-04-30 }   # À CORRIGER (4 semaines d'observation)
     pdf_officiel: ""
 
     en_bref: |
-      À compléter.
+      Un processus de l'équipe qui coince, une amélioration testée en vrai
+      pendant quatre semaines.
 
     mission_terrain: |
-      À compléter.
+      Suis les **tâches partielles du document officiel**, dans l'ordre.
+      Choisis un processus que tu vis vraiment dans l'équipe (accueil
+      d'une demande, classement, suivi d'un dossier…). Le feu vert
+      vient de moi avant la mise en œuvre.
 
     livrables:
+      - "La description du processus actuel (schéma ou étapes)"
+      - "Ta proposition d'optimisation et ses critères"
+      - "Ton bilan après quatre semaines : mieux ou pas, avec des faits"
       - "Ta case Learnings"
 
-    learnings_pistes: []
+    learnings_pistes:
+      - "Qu'est-ce qui a résisté au changement, et pourquoi ?"
 
     grille_autoeval: "DCO C — Entreprise"
     items_autoeval: [4, 5]
@@ -242,19 +326,37 @@ mandats:
       Est-ce que j'informe suffisamment les autres personnes de l'optimisation du processus ?
 
     niveau_cfc:
-      insuffisant: []
-      acquis: []
-      maitrise: []
+      insuffisant:
+        - "Proposition vague (« mieux s'organiser »)"
+        - "Aucune vérification après la mise en œuvre"
+      acquis:
+        - "Processus décrit, étape à optimiser identifiée"
+        - "Proposition mise en œuvre et vérifiée"
+        - "Personnes concernées informées"
+      maitrise:
+        - "Mesure le gain (temps, erreurs) avec des chiffres"
+        - "Ajuste la solution après les retours des collègues"
 
     theorie_essentiel: |
+      Étapes : **analyser** le processus existant → **identifier** le
+      potentiel d'optimisation → **en dériver** des solutions et les
+      mettre en œuvre → **vérifier** la réussite.
+      Une optimisation sans vérification n'est qu'une idée.
+      Un changement que personne ne connaît n'est pas appliqué : informe.
 
     liens_theorie:
       - titre: "Konvink — Optimiser les processus existants"
         url: "https://app.konvink.ch/Institution/126/31140/2/StorageItem/17029/26788?isPreview=False"
 
-    pieges: []
+    pieges:
+      - "Choisir un processus que tu ne pratiques pas toi-même"
+      - "Oublier d'informer les personnes qui utilisent le processus"
+
     avant_de_rendre:
-      - "J'ai rempli l'autoévaluation, items 4, 5"
+      - "Je décris le processus avant et après"
+      - "J'ai des faits pour dire si c'est mieux"
+      - "J'ai rempli l'autoévaluation, items 4 et 5"
+
 
   # ===================================================================
   - id: d2-objections
@@ -262,6 +364,14 @@ mandats:
     co: d2
     co_titre: "Mener des entretiens d'information et de conseil avec des clients et des fournisseurs"
     mp_officiel: "D2 – MP03"
+    mot_cle: "Objections clients"
+    taches:
+      - "Demander à des collègues d'assister à leurs entretiens de conseil, noter les dates et te préparer."
+      - "Assister à plusieurs entretiens et noter les objections, les réactions et les solutions proposées."
+      - "Discuter de tes observations avec tes collègues et compléter tes notes."
+      - "Imaginer d'autres objections possibles, chercher des réponses et en parler avec ton responsable."
+      - "Mener ou accompagner toi-même au moins trois entretiens de conseil en utilisant ce que tu as appris."
+      - "Documenter et analyser tes résultats."
     format: officiel
     statut: proposition
     dates:
@@ -269,15 +379,23 @@ mandats:
     pdf_officiel: ""
 
     en_bref: |
-      À compléter.
+      Observer comment les autres gèrent les « non, mais… », puis le faire
+      toi-même, calmement, au moins trois fois.
 
     mission_terrain: |
-      À compléter.
+      Suis les **tâches partielles du document officiel**, dans l'ordre.
+      Les entretiens peuvent être ceux de l'équipe avec les associations
+      clientes. Si un entretien réel n'est pas possible dans les délais,
+      on le simule ensemble, et tu le signales.
 
     livrables:
+      - "Ton carnet d'objections : objection, réaction observée, solution"
+      - "Tes réponses préparées à d'autres objections"
+      - "Ton retour sur tes trois entretiens"
       - "Ta case Learnings"
 
-    learnings_pistes: []
+    learnings_pistes:
+      - "Quelle objection t'a déstabilisé·e, et comment as-tu gardé ton calme ?"
 
     grille_autoeval: "DCO D — Entreprise"
     items_autoeval: [4]
@@ -285,19 +403,36 @@ mandats:
       Mes entretiens de conseil sont-ils menés de manière professionnelle ?
 
     niveau_cfc:
-      insuffisant: []
-      acquis: []
-      maitrise: []
+      insuffisant:
+        - "Prend l'objection pour une attaque personnelle"
+        - "Répond sans avoir écouté"
+      acquis:
+        - "Écoute, reformule, puis répond avec une solution"
+        - "Reste aimable et professionnel·le"
+      maitrise:
+        - "Transforme l'objection en argument"
+        - "Anticipe les objections avant qu'elles arrivent"
 
     theorie_essentiel: |
+      Une objection n'est pas un refus : c'est une **question** déguisée.
+      1. **Ce n'est pas contre toi** : l'objection vise l'offre, pas ta personne.
+      2. **Garde ton calme** : respire, ne te justifie pas trop vite.
+      3. **Écoute et reformule** : « Si je comprends bien, ce qui vous inquiète, c'est… »
+      4. **Réponds avec une solution** adaptée au besoin exprimé.
 
     liens_theorie:
       - titre: "Konvink — Mener des entretiens de conseil"
         url: "https://app.konvink.ch/Institution/126/31144/2/StorageItem/17033/24366?isPreview=False"
 
-    pieges: []
+    pieges:
+      - "Contredire le client (« non, vous avez tort »)"
+      - "Noter les objections sans noter les réponses qui ont marché"
+
     avant_de_rendre:
+      - "J'ai observé plusieurs entretiens et noté les objections"
+      - "J'ai mené ou accompagné au moins trois entretiens"
       - "J'ai rempli l'autoévaluation, item 4"
+
 
   # ===================================================================
   - id: e3-interpreter
@@ -305,6 +440,12 @@ mandats:
     co: e3
     co_titre: "Évaluer et préparer des données et des statistiques en lien avec le marché et l'entreprise"
     mp_officiel: "E3 – MP04"
+    mot_cle: "Lire des résultats"
+    taches:
+      - "Chercher un résultat d'évaluation à interpréter dans l'entreprise, les questions qu'il soulève et l'objectif de l'interprétation."
+      - "Observer le résultat : conclusions sur le contenu, liens, modèles et tendances. Résumer tes réponses."
+      - "Interpréter : raisons des tendances observées, facteurs externes, conclusions. Préparer une explication compréhensible pour d'autres."
+      - "Documenter et analyser tes résultats."
     format: officiel
     statut: proposition
     dates:
@@ -312,15 +453,23 @@ mandats:
     pdf_officiel: ""
 
     en_bref: |
-      À compléter.
+      Des chiffres réels de l'équipe ou d'un client : tu y trouves une
+      tendance et tu expliques pourquoi.
 
     mission_terrain: |
-      À compléter.
+      Suis les **tâches partielles du document officiel**, dans l'ordre.
+      Utilise des données réelles de l'équipe ou d'une association cliente
+      (participation à un événement, réponses à un questionnaire,
+      fréquentation d'un site…). Aucune donnée personnelle dans ton dépôt.
 
     livrables:
+      - "Le résultat choisi (tableau ou graphique) et ta question de départ"
+      - "Ton résumé : liens, modèles, tendances"
+      - "Ton interprétation, expliquée simplement"
       - "Ta case Learnings"
 
-    learnings_pistes: []
+    learnings_pistes:
+      - "Quel facteur extérieur aux données change la lecture du résultat ?"
 
     grille_autoeval: "DCO E — Entreprise"
     items_autoeval: [15]
@@ -328,18 +477,35 @@ mandats:
       Suis-je capable d'interpréter de manière pertinente les résultats issus d'analyses et d'évaluations ?
 
     niveau_cfc:
-      insuffisant: []
-      acquis: []
-      maitrise: []
+      insuffisant:
+        - "Décrit les chiffres sans les expliquer"
+        - "Tire une conclusion que les données ne permettent pas"
+      acquis:
+        - "Identifie une tendance et propose des raisons plausibles"
+        - "Mentionne au moins un facteur externe"
+      maitrise:
+        - "Distingue lien et cause"
+        - "Formule une recommandation concrète pour l'équipe ou le client"
 
     theorie_essentiel: |
+      **Décrire, puis expliquer.**
+      - Décrire : que montrent les données ? (hausse, baisse, écart, lien)
+      - Expliquer : pourquoi ? Quels facteurs, y compris hors des données ?
+      - Conclure : qu'est-ce que ça change pour la décision ?
+      Attention : deux choses qui évoluent ensemble ne sont pas forcément
+      la cause l'une de l'autre.
 
     liens_theorie:
       - titre: "Konvink — Interpréter les résultats"
         url: "https://app.konvink.ch/Institution/126/31149/2/StorageItem/17179/24434?isPreview=False"
 
-    pieges: []
+    pieges:
+      - "Regarder seulement une partie des données"
+      - "Confondre lien et cause"
+
     avant_de_rendre:
+      - "Mon résultat est réel et anonymisé"
+      - "J'explique au moins une tendance et ses raisons"
       - "J'ai rempli l'autoévaluation, item 15"
 
 

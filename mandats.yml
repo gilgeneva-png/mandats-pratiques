@@ -117,6 +117,10 @@ calendrier:
 #  5. LES MANDATS PRATIQUES
 #  Un bloc par MP. L'ordre ici = l'ordre d'affichage.
 #
+#  mot_cle  : 2-3 mots qui parlent aux apprentis (affiché partout à la
+#             place du code A1, E2… qui reste visible en petit)
+#  taches   : les tâches partielles du document officiel, résumées
+#
 #  ── LE CŒUR DE LA MISSION (ce que tu modifies le plus souvent) ──
 #    mission_terrain   ta consigne, en texte libre
 #    livrables         ce qu'ils déposent sur Konvink
@@ -148,10 +152,16 @@ mandats:
     co: a1
     co_titre: "Examiner et développer des compétences commerciales"
     mp_officiel: "A1 – MP03"
+    mot_cle: "Mes talents"
+    taches:
+      - "Te remémorer les six derniers mois (entreprise, école, CI) et répondre aux questions : ce que je sais bien faire, ce qui me plaît, où je bloque, où je reçois de bons retours, ce qui a du sens pour moi."
+      - "Élaborer une vue d'ensemble de tes talents, forces et faiblesses."
+      - "Trouver comment approfondir ce qui te plaît et déduire des mesures pour ce qui reste difficile."
+      - "Documenter et analyser tes résultats."
     format: officiel
     statut: valide
     dates:
-      g1: { debut: 2026-09-01, reddition: 2026-09-29 }   # À CORRIGER
+      g1: { debut: 2026-10-26, reddition: 2026-11-06 }   # À CORRIGER
     pdf_officiel: ""
 
     en_bref: |
@@ -174,8 +184,8 @@ mandats:
     learnings_pistes:
       - "Quel talent as-tu découvert ou confirmé, et dans quelle situation ?"
 
-    grille_autoeval: "Non"
-    items_autoeval: [0]
+    grille_autoeval: "DCO A — École"
+    items_autoeval: [4]
     questions_directrices: |
       Est-ce que j'accompagne mon propre développement professionnel
       de manière proactive ? (attentes réalistes, je connais mes forces
@@ -221,10 +231,17 @@ mandats:
     co: a3
     co_titre: "Recevoir et exécuter des mandats propres au domaine commercial"
     mp_officiel: "A3 – MP01"
+    mot_cle: "Réception de mandat"
+    taches:
+      - "Réfléchir à comment accepter un mandat de façon structurée et bien le comprendre."
+      - "Accepter au minimum trois mandats en utilisant la clarification de la mission."
+      - "Planifier quand et comment tu les réalises : objectifs clairs, dates limites, sans gêner tes autres tâches."
+      - "Réaliser les mandats en organisant les ressources et outils nécessaires."
+      - "Documenter et analyser tes résultats."
     format: outil
     statut: valide
     dates:
-      g1: { debut: 2026-10-12, reddition: 2026-12-18 }   # À CORRIGER (dure tout le semestre)
+      g1: { debut: 2026-09-07, reddition: 2026-12-18 }   # À CORRIGER (dure tout le semestre)
     pdf_officiel: ""
 
     en_bref: |
@@ -251,8 +268,8 @@ mandats:
     learnings_pistes:
       - "Quel mandat aurait mal tourné sans clarification ?"
 
-    grille_autoeval: "Non"
-    items_autoeval: [0]
+    grille_autoeval: "DCO A — École"
+    items_autoeval: [9, 10, 11]
     questions_directrices: |
       Puis-je procéder à une clarification complète du mandat ?
       Suis-je en mesure de planifier efficacement la mise en œuvre de mes mandats ?
@@ -297,19 +314,26 @@ mandats:
     co: e2
     co_titre: "Rechercher et évaluer des informations dans le domaine commercial et économique"
     mp_officiel: "E2 – MP02"
+    mot_cle: "Recherche entreprises"
+    taches:
+      - "Te rappeler cinq situations où il t'a manqué une information sur l'entreprise."
+      - "Identifier les informations dont tu aurais eu besoin, les rechercher et noter les sources."
+      - "Préparer ces informations pour pouvoir les présenter à d'autres personnes."
+      - "Utiliser ces informations lors de ton prochain entretien interne ou externe."
+      - "Documenter et analyser tes résultats."
     format: retour
     statut: valide
     dates:
-      g1: { debut: 2026-08-18, reddition: 2026-09-22 }   # À CORRIGER
+      g1: { debut: 2026-11-02, reddition: 2026-11-20 }   # À CORRIGER
     pdf_officiel: ""
 
     en_bref: |
-      Tu as fait beaucoup de recherches sur des entreprises/associations :
+      Tu as fait beaucoup de recherches sur des entreprises :
       raconte comment tu t'y es pris et ce que tu en as fait.
 
     mission_terrain: |
       Ce semestre, tu as mené de nombreuses **recherches sur des
-      entreprises ou des associations**. Choisis-en une ou deux et raconte :
+      entreprises**. Choisis-en une ou deux et raconte :
       - ce que tu cherchais et pourquoi ;
       - où tu as cherché, et comment tu as jugé la fiabilité des sources ;
       - comment tu as documenté tes résultats ;
@@ -369,10 +393,18 @@ mandats:
     co: c3
     co_titre: "Documenter, coordonner et mettre en œuvre des processus en entreprise"
     mp_officiel: "C3 – MP03"
+    mot_cle: "Calendrier de projet"
+    taches:
+      - "Proposer la création d'un calendrier pour un projet, en discuter avec ton responsable, recueillir les informations et planifier."
+      - "Créer le calendrier : tâches, jalons, délais de remise."
+      - "En discuter, l'améliorer et le partager avec toutes les personnes impliquées."
+      - "Superviser l'avancement et signaler à temps les délais qui ne pourront pas être tenus."
+      - "Une fois le projet terminé, évaluer le calendrier et le remanier en modèle réutilisable."
+      - "Documenter et analyser tes résultats."
     format: outil
     statut: valide
     dates:
-      g1: { debut: 2026-10-12, reddition: 2026-10-27 }   # À CORRIGER
+      g1: { debut: 2026-11-02, reddition: 2026-12-18 }   # À CORRIGER
     pdf_officiel: ""
 
     en_bref: |
@@ -380,7 +412,7 @@ mandats:
       fais vivre, tu en tires les leçons.
 
     mission_terrain: |
-      Ton **mandat de transfert** (travail cours CI) est un vrai projet.
+      Ton **mandat de transfert** (travail de l'école) est un vrai projet.
       Tu en crées le **calendrier** : tâches, jalons, délais, responsables.
       Tu le tiens à jour au fil du projet et, quand un délai glisse, tu
       l'indiques. À la reddition, tu déposes :
@@ -443,10 +475,16 @@ mandats:
     co: d2
     co_titre: "Mener des entretiens d'information et de conseil avec des clients et des fournisseurs"
     mp_officiel: "D2 – MP02"
+    mot_cle: "Présenter l'équipe"
+    taches:
+      - "Demander à un·e collègue quels besoins reviennent souvent, puis lister pour chacun : solution, utilité, avantages pour le client, inconvénients et comment les justifier."
+      - "Discuter de cet aperçu avec ton responsable et le compléter."
+      - "Mener ou accompagner un entretien de conseil en utilisant ton aperçu."
+      - "Documenter et analyser tes résultats."
     format: retour
     statut: valide
     dates:
-      g1: { debut: 2026-10-13, reddition: 2026-12-22 }   # À CORRIGER
+      g1: { debut: 2026-11-16, reddition: 2026-12-11 }   # À CORRIGER
     pdf_officiel: ""
 
     en_bref: |
@@ -521,10 +559,17 @@ mandats:
     co: b2
     co_titre: "Coordonner les interfaces dans les processus en entreprise"
     mp_officiel: "B2 – MP04"
+    mot_cle: "Infos de mandat"
+    taches:
+      - "Choisir avec ton responsable un mandat à plusieurs étapes."
+      - "Identifier les informations nécessaires, où les trouver ou comment les obtenir (notes en mots-clés)."
+      - "Élaborer un aperçu : informations pertinentes, format, emplacement, transmission, personnes à informer, canaux, archivage, contrôle qualité."
+      - "Traiter le mandat, en discuter avec ton responsable et rapporter les expériences vécues avec les personnes internes et externes."
+      - "Documenter et analyser tes résultats."
     format: retour
     statut: proposition
     dates:
-      g1: { debut: 2026-10-13, reddition: 2026-12-22 }   # À CORRIGER
+      g1: { debut: 2026-11-09, reddition: 2026-12-04 }   # À CORRIGER
     pdf_officiel: ""
 
     en_bref: |
@@ -594,21 +639,33 @@ mandats:
     co: e1
     co_titre: "Utiliser des applications propres au domaine commercial"
     mp_officiel: "E1 – MP03"
+    mot_cle: "Logiciels et données"
+    taches:
+      - "Vérifier tes accès et dresser un aperçu des logiciels que tu utilises : usage, avantages, inconvénients, interfaces."
+      - "Pendant quatre semaines, travailler systématiquement avec les données d'un logiciel (saisir, nettoyer, modifier, archiver…)."
+      - "Documenter et analyser tes résultats."
     format: outil
     statut: proposition
     dates:
-      g1: { debut: 2026-10-12, reddition: 2026-10-27 }   # À CORRIGER (4 semaines de pratique)
+      g1: { debut: 2026-10-26, reddition: 2026-11-27 }   # À CORRIGER (4 semaines de pratique)
     pdf_officiel: ""
 
     en_bref: |
-      Tu travaille avec des logiciels et des bases de données
+      Tu cartographies les outils numériques de l'équipe et tu prends
+      en charge un fichier de données réel pendant quatre semaines.
 
     mission_terrain: |
-     Pour ce MP, tu suis **les tâches partielles du document officiel,
-      telles quelles**. Ouvre le PDF et traite la tâche partielle 1. Que ce soit au sein de cette équipe ou d'un ancien stage, tu présente une dizaine de logiciels
+      Tu construis **la carte des outils de l'équipe** : pour chaque
+      outil, son usage, ses avantages, ses inconvénients, ses liens avec
+      les autres outils. Puis, pendant **quatre semaines**, tu es
+      responsable d'un fichier de données réel de l'équipe : tu le
+      saisis, le nettoies, le mets à jour ou l'archives, et tu notes
+      chaque semaine ce que tu as fait.
 
     livrables:
-      - "Tâche partielle 1 selon document officiel"
+      - "La carte des outils (tableau)"
+      - "Tes 4 relevés hebdomadaires"
+      - "Ton analyse : état du fichier avant / après, règles de protection des données appliquées"
       - "Ta case Learnings"
 
     learnings_pistes:
