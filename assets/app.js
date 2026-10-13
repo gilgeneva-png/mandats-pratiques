@@ -6,7 +6,26 @@
 (function(){
 "use strict";
 
-const PALETTE = ["#2F6CC4","#A35C00","#2E8558","#A8378A","#137F8C","#6849C4","#C43E57","#5B7316"];
+/* ---------- Thèmes ----------
+   Chaque apprenti choisit son thème ; le choix reste sur son appareil. */
+const SKINS = {
+  classique:{label:"Classique", sw:["#EEF1F5","#2F6CC4"],
+    palette:["#2F6CC4","#A35C00","#2E8558","#A8378A","#137F8C","#6849C4","#C43E57","#5B7316"]},
+  soiree:{label:"Soirée", sw:["#160F2E","#FF4FA3"],
+    palette:["#FF4FA3","#3EE0F0","#B6F23A","#FFB020","#B590FF","#FF7A5C","#4DFFB0","#F5E04A"]},
+  ferme:{label:"Ferme", sw:["#F1E8D6","#B3261E"],
+    palette:["#B3261E","#2F6B3A","#8A5D00","#2D5F8A","#7A4A23","#8A3E6B","#55661C","#B0480F"]},
+  plage:{label:"Plage", sw:["#DDF3F5","#0A7FA6"],
+    palette:["#0A7FA6","#C7402B","#0B7F74","#B4530B","#2E59A8","#B8336A","#5E7213","#8F5A08"]},
+  banque:{label:"Banque", sw:["#0F1E33","#B08A2E"],
+    palette:["#1B3A6B","#1F5E4A","#8A1C34","#7D5F10","#4A5A70","#5A3E7A","#2D6E7E","#6B4E2E"]},
+  sport:{label:"Sport", sw:["#FFFFFF","#E11D2E"],
+    palette:["#D61A2B","#1D4ED8","#15803D","#C2410C","#111827","#7C3AED","#0E7490","#A16207"]}
+};
+let SKIN = "classique";
+try{ const k = localStorage.getItem("mp-theme"); if (SKINS[k]) SKIN = k; }catch(e){}
+document.documentElement.dataset.skin = SKIN;
+const palette = () => SKINS[SKIN].palette;
 const FORMATS = {
   officiel:"Consigne officielle", journal:"Journal de bord",
   outil:"Outil à créer", retour:"Retour d'expérience"
@@ -122,7 +141,7 @@ function normalize(d){
   const limit = toDate(sem.dernier_rendu);
   const mps = asList(d.mandats).map((m,i) => {
     if (!m.id) warnings.push(`Le MP n°${i+1} (« ${m.titre || "sans titre"} ») n'a pas d'id.`);
-    return Object.assign({}, m, {color: m.couleur || PALETTE[i % PALETTE.length], index:i});
+    return Object.assign({}, m, {color: m.couleur || palette()[i % palette().length], index:i});
   });
   return {
     site, warnings, groups, limit,
@@ -215,12 +234,21 @@ function bindPicker(){
     const u = new URL(location.href); u.searchParams.set("g", s.value); location.href = u.toString();
   });
 }
+function decoHero(){
+  const d = window.MP_DECO && window.MP_DECO[SKIN];
+  return d ? `<div class="deco deco-hero" aria-hidden="true">${d.hero}</div>` : "";
+}
+function themePicker(){
+  return `<div class="skins" role="group" aria-label="Thème du site"><span class="skins-k">Thème</span>${
+    Object.entries(SKINS).map(([k,v]) => `<button type="button" class="skin${k===SKIN?" on":""}" data-skin="${k}" aria-pressed="${k===SKIN}">
+      <i style="--a:${v.sw[0]};--b:${v.sw[1]}"></i>${v.label}</button>`).join("")}</div>`;
+}
 function footer(data){
   const s = data.site;
   const bits = [];
   if (hasText(s.formateur)) bits.push(`Formateur : ${esc(s.formateur)}`);
   if (hasText(s.contact)) bits.push(`<a href="mailto:${esc(s.contact)}">${esc(s.contact)}</a>`);
-  return `<footer class="foot wrap">${bits.join("<br>")}</footer>`;
+  return `<footer class="foot wrap">${document.body.dataset.page === "mp" ? themePicker() : ""}${bits.join("<br>")}</footer>`;
 }
 function showError(err){
   const t = err && err.title ? err : {title:"Erreur inattendue", detail:String(err && err.message || err)};
@@ -263,13 +291,14 @@ function renderHome(data){
       : `<p class="kicker">Prochain rendu</p>
          <h2><a href="${link(next)}">${esc(next.titre)}</a></h2>`;
     const others = mps.filter(m => m.reddition && m.reddition > next.reddition && m.debut && m.debut <= now);
-    hero = `<section class="next${same.length>1?" multi":""}" style="--c:${next.color};--bar:${bar}" aria-label="Prochain rendu">
+    hero = `<section class="next${same.length>1?" multi":""}${decoHero()?" has-deco":""}" style="--c:${next.color};--bar:${bar}" aria-label="Prochain rendu">
       <div class="days">${n}<small>${n===1?"jour":"jours"}</small></div>
       <div class="what">
         ${what}
         <p class="when">${cap(fmtLong(next.reddition))}, ${inDays(n)}.</p>
       </div>
       ${same.length === 1 ? `<div class="actions"><a class="btn solid" href="${link(next)}">Voir la consigne</a></div>` : ""}
+      ${decoHero()}
     </section>
     ${others.length ? `<div class="also"><span class="also-k">Aussi en cours</span>${others.map(m=>`<a class="also-mp" style="--c:${m.color}" href="${link(m)}"><i></i>${esc((m.co||"").toUpperCase())}, rendu le ${fmtShort(m.reddition)}</a>`).join("")}</div>` : ""}`;
   } else if (dated.length){
@@ -281,7 +310,7 @@ function renderHome(data){
   <header class="wrap top">
     <div><h1 class="brand"><a href="./">${esc(s.titre || "Mes mandats pratiques")}</a></h1>
       <p class="sub">${esc([s.sous_titre, grp && grp.nom].filter(Boolean).join(", "))}</p></div>
-    ${groupPicker(data, g)}
+    <div class="top-tools">${groupPicker(data, g)}${themePicker()}</div>
   </header>
   <main class="wrap">
     ${warningsHtml(data, mps)}
@@ -468,7 +497,7 @@ function renderMp(data){
   document.body.innerHTML = `
   <main class="wrap narrow">
     <a class="back" href="./?g=${g}">Retour au semestre</a>
-    <header class="mp-head">
+    <header class="mp-head${decoHero()?" has-deco":""}">${decoHero()}
       <div class="ids">
         ${mp.co ? `<span class="chip">Compétence ${esc(String(mp.co).toLowerCase())}</span>` : ""}
         ${hasText(mp.mp_officiel) ? `<span class="chip">${esc(mp.mp_officiel)}</span>` : ""}
@@ -512,11 +541,26 @@ function bindChecklist(key, total){
 }
 
 /* ---------- Lancement ---------- */
+function render(data){
+  const y = window.scrollY;
+  if (document.body.dataset.page === "mp") renderMp(data); else renderHome(data);
+  const d = window.MP_DECO && window.MP_DECO[SKIN];
+  if (d && d.strip) document.body.insertAdjacentHTML("afterbegin", '<div class="deco-strip" aria-hidden="true"></div>');
+  keepDraftInLinks();
+  document.querySelectorAll(".skin").forEach(b => b.addEventListener("click", () => {
+    SKIN = b.dataset.skin;
+    try{ localStorage.setItem("mp-theme", SKIN); }catch(e){}
+    document.documentElement.dataset.skin = SKIN;
+    data.mps.forEach((m,i) => { if (!m.couleur) m.color = palette()[i % palette().length]; });
+    render(data);
+    window.scrollTo(0, y);
+    const again = document.querySelector(`.skin[data-skin="${SKIN}"]`); if (again) again.focus();
+  }));
+}
 document.addEventListener("DOMContentLoaded", async () => {
   try{
     const data = await load();
-    if (document.body.dataset.page === "mp") renderMp(data); else renderHome(data);
-    keepDraftInLinks();
+    render(data);
   }catch(e){ console.error(e); showError(e); }
 });
 })();
