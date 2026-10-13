@@ -161,7 +161,7 @@ mandats:
     format: officiel
     statut: valide
     dates:
-      g1: { debut: 2026-10-26, reddition: 2026-11-06 }   # À CORRIGER
+      g1: { debut: 2026-09-01, reddition: 2026-09-29 }   # À CORRIGER
     pdf_officiel: ""
 
     en_bref: |
@@ -184,8 +184,8 @@ mandats:
     learnings_pistes:
       - "Quel talent as-tu découvert ou confirmé, et dans quelle situation ?"
 
-    grille_autoeval: "DCO A — École"
-    items_autoeval: [4]
+    grille_autoeval: "Non"
+    items_autoeval: [0]
     questions_directrices: |
       Est-ce que j'accompagne mon propre développement professionnel
       de manière proactive ? (attentes réalistes, je connais mes forces
@@ -221,7 +221,6 @@ mandats:
     avant_de_rendre:
       - "J'ai traité les 4 tâches partielles"
       - "Chaque force et faiblesse renvoie à une situation vécue"
-      - "J'ai rempli l'autoévaluation, item 4"
       - "Ma case Learnings est écrite avec mes mots"
 
 
@@ -241,7 +240,7 @@ mandats:
     format: outil
     statut: valide
     dates:
-      g1: { debut: 2026-09-07, reddition: 2026-12-18 }   # À CORRIGER (dure tout le semestre)
+      g1: { debut: 2026-10-12, reddition: 2026-12-18 }   # À CORRIGER (dure tout le semestre)
     pdf_officiel: ""
 
     en_bref: |
@@ -268,8 +267,8 @@ mandats:
     learnings_pistes:
       - "Quel mandat aurait mal tourné sans clarification ?"
 
-    grille_autoeval: "DCO A — École"
-    items_autoeval: [9, 10, 11]
+    grille_autoeval: "Non"
+    items_autoeval: [0]
     questions_directrices: |
       Puis-je procéder à une clarification complète du mandat ?
       Suis-je en mesure de planifier efficacement la mise en œuvre de mes mandats ?
@@ -305,7 +304,6 @@ mandats:
       - "Mes photos sont lisibles"
       - "Mes fiches couvrent plusieurs semaines"
       - "J'explique l'utilité avec un exemple précis"
-      - "J'ai rempli l'autoévaluation, items 9, 10, 11"
 
 
   # ===================================================================
@@ -324,16 +322,16 @@ mandats:
     format: retour
     statut: valide
     dates:
-      g1: { debut: 2026-11-02, reddition: 2026-11-20 }   # À CORRIGER
+      g1: { debut: 2026-08-18, reddition: 2026-09-22 }   # À CORRIGER
     pdf_officiel: ""
 
     en_bref: |
-      Tu as fait beaucoup de recherches sur des entreprises :
+      Tu as fait beaucoup de recherches sur des entreprises/associations :
       raconte comment tu t'y es pris et ce que tu en as fait.
 
     mission_terrain: |
       Ce semestre, tu as mené de nombreuses **recherches sur des
-      entreprises**. Choisis-en une ou deux et raconte :
+      entreprises ou des associations**. Choisis-en une ou deux et raconte :
       - ce que tu cherchais et pourquoi ;
       - où tu as cherché, et comment tu as jugé la fiabilité des sources ;
       - comment tu as documenté tes résultats ;
@@ -404,7 +402,7 @@ mandats:
     format: outil
     statut: valide
     dates:
-      g1: { debut: 2026-11-02, reddition: 2026-12-18 }   # À CORRIGER
+      g1: { debut: 2026-10-12, reddition: 2026-10-27 }   # À CORRIGER
     pdf_officiel: ""
 
     en_bref: |
@@ -412,7 +410,7 @@ mandats:
       fais vivre, tu en tires les leçons.
 
     mission_terrain: |
-      Ton **mandat de transfert** (travail de l'école) est un vrai projet.
+      Ton **mandat de transfert** (travail cours CI) est un vrai projet.
       Tu en crées le **calendrier** : tâches, jalons, délais, responsables.
       Tu le tiens à jour au fil du projet et, quand un délai glisse, tu
       l'indiques. À la reddition, tu déposes :
@@ -484,7 +482,7 @@ mandats:
     format: retour
     statut: valide
     dates:
-      g1: { debut: 2026-11-16, reddition: 2026-12-11 }   # À CORRIGER
+      g1: { debut: 2026-10-13, reddition: 2026-12-22 }   # À CORRIGER
     pdf_officiel: ""
 
     en_bref: |
@@ -569,7 +567,7 @@ mandats:
     format: retour
     statut: proposition
     dates:
-      g1: { debut: 2026-11-09, reddition: 2026-12-04 }   # À CORRIGER
+      g1: { debut: 2026-10-13, reddition: 2026-12-22 }   # À CORRIGER
     pdf_officiel: ""
 
     en_bref: |
@@ -640,6 +638,7 @@ mandats:
     co_titre: "Utiliser des applications propres au domaine commercial"
     mp_officiel: "E1 – MP03"
     mot_cle: "Logiciels et données"
+    taches_note: "Pour ce mandat, seule la tâche partielle 1 est demandée."
     taches:
       - "Vérifier tes accès et dresser un aperçu des logiciels que tu utilises : usage, avantages, inconvénients, interfaces."
       - "Pendant quatre semaines, travailler systématiquement avec les données d'un logiciel (saisir, nettoyer, modifier, archiver…)."
@@ -647,25 +646,18 @@ mandats:
     format: outil
     statut: proposition
     dates:
-      g1: { debut: 2026-10-26, reddition: 2026-11-27 }   # À CORRIGER (4 semaines de pratique)
+      g1: { debut: 2026-10-12, reddition: 2026-10-27 }   # À CORRIGER (4 semaines de pratique)
     pdf_officiel: ""
 
     en_bref: |
-      Tu cartographies les outils numériques de l'équipe et tu prends
-      en charge un fichier de données réel pendant quatre semaines.
+      Tu travailles avec des logiciels et des bases de données
 
     mission_terrain: |
-      Tu construis **la carte des outils de l'équipe** : pour chaque
-      outil, son usage, ses avantages, ses inconvénients, ses liens avec
-      les autres outils. Puis, pendant **quatre semaines**, tu es
-      responsable d'un fichier de données réel de l'équipe : tu le
-      saisis, le nettoies, le mets à jour ou l'archives, et tu notes
-      chaque semaine ce que tu as fait.
+      Pour ce MP, tu suis **les tâches partielles du document officiel,
+      telles quelles**. Ouvre le PDF et traite la tâche partielle 1. Que ce soit au sein de cette équipe ou d'un ancien stage, tu présentes une dizaine de logiciels
 
     livrables:
-      - "La carte des outils (tableau)"
-      - "Tes 4 relevés hebdomadaires"
-      - "Ton analyse : état du fichier avant / après, règles de protection des données appliquées"
+      - "Tâche partielle 1 selon document officiel"
       - "Ta case Learnings"
 
     learnings_pistes:
@@ -680,14 +672,14 @@ mandats:
 
     niveau_cfc:
       insuffisant:
-        - "Liste d'outils sans analyse"
-        - "Travail sur les données ponctuel, pas suivi"
+        - "Liste de logiciels sans analyse"
+        - "Avantages et inconvénients génériques, copiés"
       acquis:
-        - "Carte complète et utilisable par un tiers"
-        - "Quatre semaines de suivi documentées"
+        - "Une dizaine de logiciels présentés : usage, avantages, inconvénients, interfaces"
+        - "Exemples tirés de ton usage réel"
       maitrise:
-        - "Propose une amélioration concrète du fichier ou de son usage"
-        - "Applique et explique les règles de protection des données"
+        - "Montre comment les logiciels communiquent entre eux"
+        - "Propose une amélioration de l'usage d'un outil"
 
     theorie_essentiel: |
       - Une **base de données** = des informations structurées en champs
@@ -703,13 +695,12 @@ mandats:
         url: "https://app.konvink.ch/Institution/126/31147/2/StorageItem/17177/26765?isPreview=False"
 
     pieges:
-      - "Recopier une liste d'avantages trouvée en ligne au lieu de parler de l'usage réel"
-      - "Tout reconstituer à la fin au lieu de noter chaque semaine"
+      - "Recopier une liste d'avantages trouvée en ligne au lieu de parler de ton usage réel"
+      - "Oublier les interfaces (comment un logiciel échange avec un autre)"
 
     avant_de_rendre:
-      - "Ma carte des outils est compréhensible sans moi"
-      - "J'ai 4 relevés hebdomadaires datés"
-      - "Aucune donnée personnelle n'apparaît dans mon dépôt"
+      - "Je présente une dizaine de logiciels"
+      - "Pour chacun : usage, avantages, inconvénients, interfaces"
       - "J'ai rempli l'autoévaluation, item 1"
 
 
