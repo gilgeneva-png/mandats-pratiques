@@ -14,8 +14,7 @@ Le seul fichier à modifier est **`mandats.yml`**.
 4. Cliquer sur **Commit changes**.
 
 Le site se met à jour tout seul en une à deux minutes.
-Le mode d'emploi détaillé (dates, indentation, guillemets) est écrit
-en tête du fichier `mandats.yml`.
+Mode d'emploi complet : https://gilgeneva-png.github.io/mandats-pratiques/formateur.html
 
 Si le fichier contient une erreur, le site affiche un message avec le
 numéro de la ligne à corriger.
@@ -27,4 +26,6 @@ numéro de la ligne à corriger.
 | `mandats.yml` | Toutes les données : semestre, vacances, MP, Learnings | Oui |
 | `index.html` | Page d'accueil (planning du semestre) | Non |
 | `mp.html` | Page détaillée d'un MP | Non |
+| `formateur.html` | Mode d'emploi formateur (non lié depuis le site) | Non |
+| `mandats-S6.yml` | Brouillon du semestre suivant (aperçu : `?fichier=mandats-S6.yml`) | Oui |
 | `assets/` | Mise en forme et fonctionnement du site | Non |

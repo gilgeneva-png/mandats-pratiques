@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Mode d'emploi formateur</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<style>
+@page { size: A4; margin: 18mm 18mm 18mm 18mm; }
+:root{ --ink:#1F2A44; --soft:#5A6684; --line:#D5DBE6; --paper:#EEF1F5; --blue:#2F6CC4; --red:#C43E57; }
+*{box-sizing:border-box}
+body{ font-family:"Atkinson Hyperlegible","Inter",sans-serif; color:var(--ink); font-size:10.5pt; line-height:1.5; margin:0; }
+@media screen{
+  body{ background:var(--paper); font-size:16px; padding:0 16px 60px; }
+  main{ max-width:860px; margin:0 auto; background:#fff; border-radius:18px; padding:34px 38px; margin-top:20px; }
+  .page-break{ break-before:auto }
+  .key{ grid-template-columns:1fr }
+  @media (max-width:700px){ code{ overflow-wrap:anywhere } .box .v{ white-space:normal !important; overflow-wrap:anywhere } table{ table-layout:fixed } main{ padding:22px 18px } .rules,.two{ grid-template-columns:1fr } td:first-child{ width:auto } }
+}
+.toolbar{ max-width:860px; margin:16px auto 0; display:flex; flex-wrap:wrap; gap:10px 16px; align-items:center; justify-content:space-between; font-size:14px; color:var(--soft) }
+.toolbar a, .toolbar button{ font:inherit; font-weight:700; color:var(--ink); background:#fff; border:2px solid var(--ink); border-radius:999px; padding:7px 16px; cursor:pointer; text-decoration:none }
+.version{ font-size:9pt; color:var(--soft); margin:0 0 10pt }
+@media print{ .toolbar{ display:none } main{ padding:0 } }
+.meta{ position:fixed; top:-12mm; right:0; font-size:8pt; color:var(--soft); text-align:right; }
+h1{ font-family:"Inter Display","Inter",sans-serif; font-weight:800; font-size:26pt; letter-spacing:-.02em; line-height:1.05; margin:0 0 4pt; }
+.sub{ color:var(--soft); font-size:11.5pt; margin:0 0 16pt; }
+h2{ font-family:"Inter Display","Inter",sans-serif; font-weight:800; font-size:15pt; margin:20pt 0 7pt; display:flex; align-items:center; gap:8pt; break-after:avoid; }
+h2 .n{ display:inline-grid; place-items:center; width:20pt; height:20pt; border-radius:50%; background:var(--ink); color:#fff; font-size:10.5pt; flex:none }
+p{ margin:0 0 7pt; }
+code, .code{ font-family:"DejaVu Sans Mono",monospace; font-size:8.8pt; }
+code{ background:var(--paper); padding:1pt 4pt; border-radius:3pt; }
+.key{ display:grid; grid-template-columns:1fr 1fr; gap:8pt; margin:6pt 0 4pt; }
+.box{ border:1.2pt solid var(--line); border-radius:8pt; padding:9pt 11pt; }
+.box b{ display:block; font-size:9pt; color:var(--soft); font-weight:600; margin-bottom:2pt }
+.box .v{ font-weight:700; font-size:9.5pt; white-space:nowrap }
+.principle{ background:var(--ink); color:#fff; border-radius:10pt; padding:12pt 16pt; margin:12pt 0 4pt; font-size:11.5pt; }
+.principle strong{ font-weight:800 }
+ol.steps{ list-style:none; padding:0; margin:4pt 0; counter-reset:s; }
+ol.steps li{ counter-increment:s; position:relative; padding:4pt 0 4pt 30pt; border-bottom:1pt dashed var(--line); }
+ol.steps li:last-child{ border-bottom:0 }
+ol.steps li::before{ content:counter(s); position:absolute; left:0; top:3pt; width:19pt; height:19pt; border-radius:50%;
+  border:1.5pt solid var(--blue); color:var(--blue); font-weight:700; font-size:9.5pt; display:grid; place-items:center; }
+table{ width:100%; border-collapse:collapse; margin:4pt 0 6pt; font-size:9.6pt; }
+th{ text-align:left; font-weight:700; color:var(--soft); font-size:8.8pt; padding:5pt 7pt; border-bottom:1.5pt solid var(--ink); }
+td{ padding:6pt 7pt; border-bottom:1pt solid var(--line); vertical-align:top; }
+tr{ break-inside:avoid; }
+td:first-child{ font-weight:600; width:27%; }
+pre.code{ background:var(--paper); border-radius:6pt; padding:7pt 9pt; margin:3pt 0 0; white-space:pre-wrap; line-height:1.35; }
+.rules{ display:grid; grid-template-columns:repeat(3,1fr); gap:8pt; margin:6pt 0; }
+.rule{ border:1.5pt solid var(--ink); border-radius:8pt; padding:9pt 10pt; }
+.rule b{ display:block; font-family:"Inter Display","Inter",sans-serif; font-size:11pt; margin-bottom:3pt }
+.rule p{ margin:0; font-size:9.6pt }
+.alert{ border-left:4pt solid var(--red); padding:4pt 0 4pt 10pt; margin:8pt 0; }
+.alert b{ color:var(--red) }
+.two{ display:grid; grid-template-columns:1fr 1fr; gap:12pt; }
+ul{ margin:0 0 6pt; padding-left:15pt } li{ margin-bottom:2pt }
+.avoid{ break-inside:avoid }
+.page-break{ break-before:page }
+.muted{ color:var(--soft) }
+.two ol.steps li{ padding-top:3pt; padding-bottom:3pt }
+</style>
+</head>
+<body>
+<div class="toolbar"><span>Page réservée au formateur. Elle n'est liée nulle part sur le site des apprentis.</span>
+  <span><a href="./">Voir le site</a> <button type="button" onclick="window.print()">Imprimer ou enregistrer en PDF</button></span></div>
+<main>
+
+<h1>Site des mandats pratiques</h1>
+<p class="sub">Mode d'emploi formateur : mettre à jour le site sans toucher au code</p>
+<p class="version">Gil Charmillot · version du 13.10.2026 · cette page est mise à jour en même temps que le site</p>
+
+<div class="key">
+  <div class="box"><b>Le site (apprentis)</b><span class="v">gilgeneva-png.github.io/mandats-pratiques</span></div>
+  <div class="box"><b>Le dépôt (formateur)</b><span class="v">github.com/gilgeneva-png/mandats-pratiques</span></div>
+</div>
+
+<div class="principle">Un seul fichier à modifier : <strong>mandats.yml</strong>. Tout le site en découle : planning, pages des MP, compte à rebours, fichiers agenda. Le reste du dépôt ne se touche jamais.</div>
+
+<h2><span class="n">1</span>Modifier le site</h2>
+<ol class="steps">
+  <li>Ouvrir le dépôt sur github.com et se connecter.</li>
+  <li>Cliquer sur le fichier <code>mandats.yml</code>.</li>
+  <li>Cliquer sur l'icône crayon, en haut à droite du fichier. Le texte devient modifiable.</li>
+  <li>Retrouver le passage avec Ctrl+F (Cmd+F sur Mac), par exemple en tapant l'id du MP : <code>b2-mandat</code>.</li>
+  <li>Modifier, puis cliquer sur le bouton vert <strong>Commit changes</strong>, et confirmer dans la fenêtre.</li>
+  <li>Attendre une à deux minutes, puis recharger le site pour vérifier.</li>
+</ol>
+
+<h2><span class="n">2</span>Les trois règles pour ne rien casser</h2>
+<div class="rules">
+  <div class="rule"><b>Les espaces</b><p>Les espaces en début de ligne donnent la structure. Ne pas les supprimer ni utiliser la touche Tab.</p></div>
+  <div class="rule"><b>Les dates</b><p>Toujours au format année-mois-jour : <code>2026-12-04</code>.</p></div>
+  <div class="rule"><b>Les guillemets</b><p>Un texte court qui contient « : » se met entre guillemets : <code>"Note : à rendre"</code>.</p></div>
+</div>
+<p>Pour les textes longs (consignes), tout est permis après la ligne qui se termine par <code>|</code>, à condition de garder le même décalage à gauche.</p>
+
+<h2 class="page-break"><span class="n">3</span>Les modifications courantes</h2>
+<table>
+  <thead><tr><th>Je veux…</th><th>Ce que je modifie</th></tr></thead>
+  <tbody>
+  <tr><td>Changer une date de rendu</td><td>La ligne <code>g1:</code> du MP concerné.
+    <pre class="code">dates:
+  g1: { debut: 2026-11-09, reddition: 2026-12-04 }</pre></td></tr>
+  <tr><td>Valider une consigne provisoire</td><td>Remplacer <code>statut: proposition</code> par <code>statut: valide</code>. Le bandeau « consigne provisoire » disparaît de la page.</td></tr>
+  <tr><td>Réécrire une consigne</td><td>Le texte sous <code>mission_terrain: |</code>, en gardant le décalage. Une ligne commençant par <code>- </code> devient une puce, <code>**mot**</code> passe en gras.</td></tr>
+  <tr><td>Ajouter un livrable</td><td>Une ligne sous <code>livrables:</code>, alignée sur les autres.
+    <pre class="code">livrables:
+  - "Mon nouveau livrable"</pre></td></tr>
+  <tr><td>Changer les items d'autoévaluation</td><td>Les numéros des bulles bleues : <code>items_autoeval: [9, 10, 11]</code></td></tr>
+  <tr><td>Lier le PDF exact d'un MP</td><td>Coller le lien de partage Drive entre les guillemets : <code>pdf_officiel: "https://drive…"</code>. Vide, le bouton ouvre le dossier Drive.</td></tr>
+  <tr><td>Ajouter un événement (TP blancs, CI…)</td><td>Un bloc dans <code>calendrier:</code>.
+    <pre class="code">  - nom: "TP oraux blancs"
+    type: evenement
+    debut: 2026-12-14
+    fin: 2026-12-14</pre></td></tr>
+  <tr><td>Modifier la case Learnings</td><td>Section 6 du fichier, commune à tous les MP. La question propre à chaque MP est dans <code>learnings_pistes</code>.</td></tr>
+  <tr><td>Ajouter un MP</td><td>Copier un bloc MP entier (de <code>- id:</code> jusqu'au bloc suivant), le coller à la fin de la section 5, puis changer l'<code>id</code> (unique, sans espace ni accent) et le contenu.</td></tr>
+  </tbody>
+</table>
+
+<div class="avoid"><h2><span class="n">4</span>En cas d'erreur</h2>
+<div class="alert"><b>Message rouge sur le site.</b> Il indique le numéro de la ligne fautive dans <code>mandats.yml</code>. Corriger cette ligne (le plus souvent : un espace en trop ou en moins, ou des « : » sans guillemets), puis recommiter.</div>
+<div class="alert"><b>Avertissement « À corriger ».</b> Une date de rendu tombe après le dernier rendu du semestre (22.12), ou un MP n'a pas de date. Le site fonctionne, mais l'incohérence est signalée.</div>
+<p><strong>Revenir en arrière :</strong> sur la page de <code>mandats.yml</code>, cliquer sur <em>History</em>, ouvrir la version précédente, copier son contenu et le recoller dans l'éditeur.</p></div>
+
+<h2 class="avoid"><span class="n">5</span>Préparer le semestre suivant</h2>
+<p>Le semestre suivant se prépare dans un <strong>fichier brouillon</strong>, dans le même dépôt : <code>mandats-S6.yml</code>. Les apprentis ne le voient pas.</p>
+<table>
+  <thead><tr><th>Fichier</th><th>Qui le voit, et à quelle adresse</th></tr></thead>
+  <tbody>
+  <tr><td><code>mandats.yml</code></td><td>Les apprentis : le semestre en cours.<br><code>gilgeneva-png.github.io/mandats-pratiques/</code></td></tr>
+  <tr><td><code>mandats-S6.yml</code></td><td>Le formateur seul, en aperçu, avec un bandeau jaune « brouillon ».<br><code>gilgeneva-png.github.io/mandats-pratiques/?fichier=mandats-S6.yml</code></td></tr>
+  </tbody>
+</table>
+<div class="two avoid">
+  <div>
+    <p><strong>Pendant la préparation</strong></p>
+    <ul>
+      <li>Modifier <code>mandats-S6.yml</code> sur GitHub, comme <code>mandats.yml</code>.</li>
+      <li>Vérifier le résultat avec l'adresse d'aperçu, à garder en favori.</li>
+      <li>Créer un dossier Drive pour les MP du semestre, <strong>à côté</strong> du dossier du semestre en cours, jamais à l'intérieur : sur Drive, le partage d'un dossier s'applique à tout ce qu'il contient.</li>
+      <li>Coller le lien de ce dossier dans <code>dossier_pdf</code>. Ne le partager avec les apprentis qu'au changement de semestre.</li>
+      <li>Passer chaque MP de <code>proposition</code> à <code>valide</code> une fois la consigne arrêtée.</li>
+    </ul>
+  </div>
+  <div>
+    <p><strong>Le jour du changement</strong></p>
+    <ol class="steps">
+      <li>Renommer <code>mandats.yml</code> en <code>mandats-S5.yml</code> (crayon, modifier le nom en haut, Commit). C'est l'archive.</li>
+      <li>Renommer <code>mandats-S6.yml</code> en <code>mandats.yml</code>.</li>
+      <li>Recharger le site : les apprentis voient le nouveau semestre.</li>
+      <li>Sur Drive, partager le dossier du nouveau semestre (accès restreint, lecture seule) et retirer les accès de l'ancien si le groupe change.</li>
+    </ol>
+    <p>L'ancien semestre reste consultable avec <code>?fichier=mandats-S5.yml</code>.</p>
+  </div>
+</div>
+<p class="muted" style="font-size:9.5pt">Le nom d'un brouillon est libre (lettres, chiffres, tirets), tant qu'il se termine par <code>.yml</code>.</p>
+
+<h2 class="avoid"><span class="n">6</span>Deuxième groupe</h2>
+<ul class="avoid">
+  <li>Ajouter le groupe dans <code>groupes:</code> avec l'id <code>g2</code>.</li>
+  <li>Dans chaque MP, ajouter une ligne <code>g2:</code> avec ses dates.</li>
+  <li>Si la consigne diffère, utiliser <code>variantes:</code> (exemple dans le fichier).</li>
+  <li>Un menu « Mon groupe » apparaît alors automatiquement sur le site.</li>
+</ul>
+
+<h2 class="avoid"><span class="n">7</span>Bon à savoir</h2>
+<ul class="avoid">
+  <li><strong>Thèmes :</strong> chaque apprenti choisit l'ambiance du site (Classique, Soirée, Ferme, Plage, Banque, Sport : couleurs, police, illustrations, motifs) en haut de l'accueil ou en bas d'une page MP. Le choix reste sur son appareil et ne change rien au contenu. Rien à configurer côté formateur.</li>
+  <li><strong>Fichiers agenda :</strong> si une date change après qu'un apprenti a importé le fichier agenda, son agenda ne se met pas à jour. Lui demander de réimporter.</li>
+  <li><strong>Checklist « Avant de rendre » :</strong> les coches restent sur le téléphone de l'apprenti. Le formateur n'y a pas accès.</li>
+  <li><strong>Site public :</strong> il ne doit contenir aucun nom ni aucune donnée d'apprenti. Les PDF officiels restent protégés sur le Drive institutionnel.</li>
+  <li><strong>Ouvrir index.html sur l'ordinateur ne fonctionne pas :</strong> le site ne marche qu'en ligne.</li>
+</ul>
+
+<h2 class="avoid"><span class="n">8</span>Mettre à jour le site lui-même</h2>
+<p>Quand une fonction ou le design change, une archive <code>.zip</code> est livrée. Elle ne contient jamais <code>mandats.yml</code> ni les brouillons : le contenu n'est pas touché.</p>
+<ol class="steps">
+  <li>Décompresser l'archive.</li>
+  <li>Dans le dépôt, rester <strong>à la racine</strong> (ne pas entrer dans <code>assets</code>), puis Add file, Upload files.</li>
+  <li>Glisser tout le contenu de l'archive d'un coup. GitHub conserve les sous-dossiers.</li>
+  <li>Commit changes, puis recharger le site avec Ctrl+Maj+R.</li>
+</ol>
+<p><strong>Contenu normal de la racine du dépôt :</strong> <code>index.html</code>, <code>mp.html</code>, <code>formateur.html</code>, <code>mandats.yml</code>, les brouillons (<code>mandats-S6.yml</code>…), <code>README.md</code> et le dossier <code>assets</code>. Un fichier en trop (doublon) se supprime : l'ouvrir, « … » en haut à droite, Delete file, Commit.</p>
+</main>
+</body>
+</html>
