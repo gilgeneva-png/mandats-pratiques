@@ -500,7 +500,9 @@ function renderMp(data){
 
   const n = mp.reddition ? daysBetween(now, mp.reddition) : null;
   const pdf = hasText(mp.pdf_officiel) ? mp.pdf_officiel : (hasText(s.dossier_pdf) ? s.dossier_pdf : "");
-  const items = asList(mp.items_autoeval);
+  /* « Non » ou 0 = pas d'autoévaluation pour ce mandat */
+  const noAuto = /^\s*non\s*$/i.test(String(mp.grille_autoeval || ""));
+  const items = noAuto ? [] : asList(mp.items_autoeval).filter(x => String(x).trim() !== "0");
   const L = data.learnings || {};
 
   const facts = [];
@@ -512,12 +514,14 @@ function renderMp(data){
   const blocks = [];
   if (hasText(mp.mission_terrain)) blocks.push(block("Ta mission", `<div class="prose">${md(mp.mission_terrain)}</div>`));
   const tp = asList(mp.taches);
-  if (tp.length) blocks.push(block("Les tâches partielles", `<p class="muted">Résumé du document officiel. Chaque tâche partielle doit apparaître dans ce que tu rends.</p>
+  if (tp.length) blocks.push(block("Les tâches partielles", `<p class="muted">${hasText(mp.taches_note) ? `<strong>${inline(mp.taches_note)}</strong> ` : ""}Résumé du document officiel.${hasText(mp.taches_note) ? "" : " Chaque tâche partielle doit apparaître dans ce que tu rends."}</p>
     <ol class="tasks">${tp.map(x=>`<li>${inline(x)}</li>`).join("")}</ol>`));
   const liv = asList(mp.livrables);
   if (liv.length) blocks.push(block("À déposer sur Konvink", `<ul>${liv.map(x=>`<li>${inline(x)}</li>`).join("")}</ul>`));
 
-  if (items.length || hasText(mp.questions_directrices)){
+  if (!items.length && hasText(mp.questions_directrices)){
+    blocks.push(block("Les questions à te poser", `<ul>${String(mp.questions_directrices).replace(/\s+/g," ").trim().split(/(?<=\?)\s+(?=[A-ZÀ-Ý])/).filter(Boolean).map(x=>`<li>${inline(x)}</li>`).join("")}</ul>`));
+  } else if (items.length || hasText(mp.questions_directrices)){
     blocks.push(block("Ton autoévaluation", `
       ${items.length ? `<p>Dans la grille${hasText(mp.grille_autoeval) ? ` <strong>${esc(mp.grille_autoeval)}</strong>` : ""}, remplis ${items.length>1?"les items":"l'item"} :</p>
         <div class="bubbles" style="margin-bottom:14px">${items.map(i=>`<span class="bubble">${esc(i)}</span>`).join("")}</div>` : ""}
