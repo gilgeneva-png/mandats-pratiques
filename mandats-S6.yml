@@ -1,0 +1,364 @@
+# =====================================================================
+#  BROUILLON — Semestre 6 (printemps 2026-2027)
+#  Aperçu : …/mandats-pratiques/?fichier=mandats-S6.yml
+#  Les apprentis ne voient PAS ce fichier tant qu'il n'est pas
+#  renommé en mandats.yml.
+# =====================================================================
+#  FICHIER MAÎTRE — Site des mandats pratiques
+#  C'est le SEUL fichier à mettre à jour. Tout le site est généré à
+#  partir de lui (Gantt, pages MP, compte à rebours, fichiers agenda).
+# =====================================================================
+#
+#  MODE D'EMPLOI (5 règles, c'est tout)
+#
+#  1. Dates toujours au format AAAA-MM-JJ   ex : 2026-11-13
+#  2. Indentation = 2 espaces, jamais de tabulation.
+#     L'alignement à gauche définit la structure : ne pas le casser.
+#  3. Texte long : écrire  |  après les deux-points, puis le texte
+#     en dessous, indenté. Dans ce cas, tout caractère est autorisé.
+#  4. Texte court contenant « : » ou « # » → le mettre entre guillemets
+#     ex :  titre: "Objectifs SMART : fixer et mesurer"
+#  5. Une ligne qui commence par # est un commentaire : ignorée par le site.
+#
+#  Si une règle est cassée, le site affiche un message avec le numéro
+#  de la ligne fautive au lieu de planter silencieusement.
+#
+#  Mise en forme autorisée dans les textes : **gras**, *italique*,
+#  listes avec « - » en début de ligne, liens [texte](https://...)
+# =====================================================================
+
+
+# ---------------------------------------------------------------------
+#  1. LE SITE
+# ---------------------------------------------------------------------
+site:
+  titre: "Mes mandats pratiques"
+  sous_titre: "Semestre de printemps 2026-2027"
+  formateur: "Gil Charmillot"
+  dossier_pdf: "https://drive.google.com/drive/folders/10L7ue6DgFDUVYngzcpiG0ArCfbus76du?usp=drive_link"
+                         # lien utilisé si un MP n'a pas son propre pdf_officiel
+  contact: ""            # email affiché en pied de page (laisser vide = rien affiché)
+  rappels_agenda: [7, 1] # alertes dans le fichier agenda : X jours avant la reddition
+
+
+# ---------------------------------------------------------------------
+#  2. LE SEMESTRE  (bornes du Gantt)
+# ---------------------------------------------------------------------
+semestre:
+  debut: 2027-01-18            # À VÉRIFIER
+  fin: 2027-06-25              # À VÉRIFIER
+  dernier_rendu: 2027-06-04   # date butoir absolue : aucune reddition ne peut être placée après
+
+
+# ---------------------------------------------------------------------
+#  3. LES GROUPES
+#  Pour l'instant un seul. Pour ajouter le 2e groupe plus tard :
+#  copier le bloc, changer id et nom, puis ajouter ses dates dans
+#  chaque MP (voir section 5).
+# ---------------------------------------------------------------------
+groupes:
+  - id: g1
+    nom: "Équipe Culture+SP"
+    actif: true
+
+
+# ---------------------------------------------------------------------
+#  4. CALENDRIER  (vacances, jours fériés, événements)
+#  type possible :  vacances | ferie | evenement
+#  Source vacances et fériés : ge.ch, calendrier scolaire 2026-2027.
+#  Toute l'année scolaire est saisie : le Gantt n'affiche que ce qui
+#  tombe dans les bornes du semestre ci-dessus.
+# ---------------------------------------------------------------------
+calendrier:
+  - nom: "Jeûne genevois"
+    type: ferie
+    debut: 2026-09-10
+    fin: 2026-09-10
+
+  - nom: "Vacances d'automne"
+    type: vacances
+    debut: 2026-10-19
+    fin: 2026-10-23
+
+  - nom: "Vacances de Noël et Nouvel An"
+    type: vacances
+    debut: 2026-12-24
+    fin: 2027-01-08
+
+  - nom: "Vacances de février"
+    type: vacances
+    debut: 2027-02-15
+    fin: 2027-02-19
+
+  - nom: "Vacances de Pâques"
+    type: vacances
+    debut: 2027-03-26
+    fin: 2027-04-09
+
+  - nom: "Pont de l'Ascension"
+    type: ferie
+    debut: 2027-05-06
+    fin: 2027-05-07
+
+  - nom: "Lundi de Pentecôte"
+    type: ferie
+    debut: 2027-05-17
+    fin: 2027-05-17
+
+  # À COMPLÉTER : entretiens d'évaluation de fin de semestre
+
+  # Exemple d'événement (CI, TP oraux, entretiens de qualification...)
+  # Supprimer le # devant les 4 lignes pour l'activer.
+  # - nom: "TP oraux blancs"
+  #   type: evenement
+  #   debut: 2026-12-14
+  #   fin: 2026-12-14
+
+
+# ---------------------------------------------------------------------
+#  5. LES MANDATS PRATIQUES — SEMESTRE 6
+#  Squelettes préremplis depuis la grille « Semestre 6 » :
+#  titre, CO, items d'autoévaluation, questions directrices, lien Konvink.
+#  À COMPLÉTER : dates, mission_terrain, livrables, learnings_pistes,
+#  niveau_cfc, théorie, pièges, checklist.
+#  Tous en statut « proposition » tant que non validés.
+# ---------------------------------------------------------------------
+mandats:
+
+  # ===================================================================
+  - id: a2-profil
+    titre: "Mettre à jour son propre profil sur les réseaux sociaux"
+    co: a2
+    co_titre: "Développer et utiliser des réseaux propres au domaine commercial"
+    mp_officiel: "A2 – MP03"
+    format: officiel
+    statut: proposition
+    dates:
+      g1: { debut: 2027-01-25, reddition: 2027-02-26 }   # À CORRIGER
+    pdf_officiel: ""
+
+    en_bref: |
+      À compléter.
+
+    mission_terrain: |
+      À compléter.
+
+    livrables:
+      - "Ta case Learnings"
+
+    learnings_pistes: []
+
+    grille_autoeval: "DCO A — École"
+    items_autoeval: [7]
+    questions_directrices: |
+      Est-ce que je me positionne de façon appropriée au sein du réseau professionnel ? (image pro, langage, points forts, centres d'intérêt)
+
+    niveau_cfc:
+      insuffisant: []
+      acquis: []
+      maitrise: []
+
+    theorie_essentiel: |
+
+    liens_theorie:
+      - titre: "Konvink — Construire un réseau professionnel"
+        url: "https://app.konvink.ch/Institution/126/30952/2/StorageItem/17018/24296?isPreview=False"
+
+    pieges: []
+    avant_de_rendre:
+      - "J'ai rempli l'autoévaluation, item 7"
+
+  # ===================================================================
+  - id: b3-opinion
+    titre: "Interpréter les développements économiques et se forger sa propre opinion"
+    co: b3
+    co_titre: "Participer aux discussions économiques"
+    mp_officiel: "B3 – MP01"
+    format: officiel
+    statut: proposition
+    dates:
+      g1: { debut: 2027-02-01, reddition: 2027-03-19 }   # À CORRIGER
+    pdf_officiel: ""
+
+    en_bref: |
+      À compléter.
+
+    mission_terrain: |
+      À compléter.
+
+    livrables:
+      - "Ta case Learnings"
+
+    learnings_pistes: []
+
+    grille_autoeval: "DCO B — Entreprise"
+    items_autoeval: [6, 7]
+    questions_directrices: |
+      Suis-je capable de rechercher des informations appropriées afin de m'intéresser à un sujet de manière plus approfondie ?
+      Suis-je capable de me forger ma propre opinion sur un sujet de manière fondée ?
+
+    niveau_cfc:
+      insuffisant: []
+      acquis: []
+      maitrise: []
+
+    theorie_essentiel: |
+
+    liens_theorie:
+      - titre: "Konvink — Interpréter les développements économiques"
+        url: "https://app.konvink.ch/Institution/126/31135/2/StorageItem/17024/26964?isPreview=False"
+
+    pieges: []
+    avant_de_rendre:
+      - "J'ai rempli l'autoévaluation, items 6, 7"
+
+  # ===================================================================
+  - id: c3-optimiser
+    titre: "Optimiser les processus"
+    co: c3
+    co_titre: "Documenter, coordonner et mettre en œuvre des processus en entreprise"
+    mp_officiel: "C3 – MP02"
+    format: officiel
+    statut: proposition
+    dates:
+      g1: { debut: 2027-02-22, reddition: 2027-04-30 }   # À CORRIGER
+    pdf_officiel: ""
+
+    en_bref: |
+      À compléter.
+
+    mission_terrain: |
+      À compléter.
+
+    livrables:
+      - "Ta case Learnings"
+
+    learnings_pistes: []
+
+    grille_autoeval: "DCO C — Entreprise"
+    items_autoeval: [4, 5]
+    questions_directrices: |
+      Est-ce que je parviens à élaborer et à mettre en œuvre des mesures d'optimisation d'un processus de mon équipe ou entreprise ?
+      Est-ce que j'informe suffisamment les autres personnes de l'optimisation du processus ?
+
+    niveau_cfc:
+      insuffisant: []
+      acquis: []
+      maitrise: []
+
+    theorie_essentiel: |
+
+    liens_theorie:
+      - titre: "Konvink — Optimiser les processus existants"
+        url: "https://app.konvink.ch/Institution/126/31140/2/StorageItem/17029/26788?isPreview=False"
+
+    pieges: []
+    avant_de_rendre:
+      - "J'ai rempli l'autoévaluation, items 4, 5"
+
+  # ===================================================================
+  - id: d2-objections
+    titre: "Répondre à des objections"
+    co: d2
+    co_titre: "Mener des entretiens d'information et de conseil avec des clients et des fournisseurs"
+    mp_officiel: "D2 – MP03"
+    format: officiel
+    statut: proposition
+    dates:
+      g1: { debut: 2027-04-12, reddition: 2027-05-21 }   # À CORRIGER
+    pdf_officiel: ""
+
+    en_bref: |
+      À compléter.
+
+    mission_terrain: |
+      À compléter.
+
+    livrables:
+      - "Ta case Learnings"
+
+    learnings_pistes: []
+
+    grille_autoeval: "DCO D — Entreprise"
+    items_autoeval: [4]
+    questions_directrices: |
+      Mes entretiens de conseil sont-ils menés de manière professionnelle ?
+
+    niveau_cfc:
+      insuffisant: []
+      acquis: []
+      maitrise: []
+
+    theorie_essentiel: |
+
+    liens_theorie:
+      - titre: "Konvink — Mener des entretiens de conseil"
+        url: "https://app.konvink.ch/Institution/126/31144/2/StorageItem/17033/24366?isPreview=False"
+
+    pieges: []
+    avant_de_rendre:
+      - "J'ai rempli l'autoévaluation, item 4"
+
+  # ===================================================================
+  - id: e3-interpreter
+    titre: "Interpréter des résultats d'évaluations"
+    co: e3
+    co_titre: "Évaluer et préparer des données et des statistiques en lien avec le marché et l'entreprise"
+    mp_officiel: "E3 – MP04"
+    format: officiel
+    statut: proposition
+    dates:
+      g1: { debut: 2027-04-19, reddition: 2027-06-04 }   # À CORRIGER
+    pdf_officiel: ""
+
+    en_bref: |
+      À compléter.
+
+    mission_terrain: |
+      À compléter.
+
+    livrables:
+      - "Ta case Learnings"
+
+    learnings_pistes: []
+
+    grille_autoeval: "DCO E — Entreprise"
+    items_autoeval: [15]
+    questions_directrices: |
+      Suis-je capable d'interpréter de manière pertinente les résultats issus d'analyses et d'évaluations ?
+
+    niveau_cfc:
+      insuffisant: []
+      acquis: []
+      maitrise: []
+
+    theorie_essentiel: |
+
+    liens_theorie:
+      - titre: "Konvink — Interpréter les résultats"
+        url: "https://app.konvink.ch/Institution/126/31149/2/StorageItem/17179/24434?isPreview=False"
+
+    pieges: []
+    avant_de_rendre:
+      - "J'ai rempli l'autoévaluation, item 15"
+
+
+# ---------------------------------------------------------------------
+#  6. LA CASE « LEARNINGS »  (modèle commun, affiché sur chaque page MP)
+#  Les « learnings_pistes » de chaque MP s'ajoutent à ces questions.
+# ---------------------------------------------------------------------
+learnings:
+  intro: |
+    La case Learnings, c'est **ton résumé à toi** : la situation, la
+    compétence, ce que tu en retiens. Écris-la comme si tu devais la
+    raconter à l'oral, sans tes notes. Si tu ne peux pas la défendre
+    en deux minutes, elle n'est pas encore prête.
+  questions:
+    - "La situation : où, quand, avec qui, quelle tâche ?"
+    - "La compétence avec tes mots : qu'est-ce qu'elle veut dire, et à quoi elle sert dans ton métier ?"
+    - "Ce que tu as fait concrètement, étape par étape"
+    - "Ce que tu en retiens, et ce que tu ferais autrement la prochaine fois"
+  regles:
+    - "Écrit au « je », avec des noms réels (l'équipe, l'association, l'outil)"
+    - "10 à 15 lignes suffisent"
+    - "Aucune définition copiée : si tu ne l'expliquerais pas comme ça à l'oral, réécris-la"
