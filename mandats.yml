@@ -42,7 +42,7 @@ site:
 semestre:
   debut: 2026-08-17
   fin: 2027-01-12
-  dernier_rendu: 2026-12-22   # date butoir absolue : aucune reddition ne peut être placée après
+  dernier_rendu: 2026-12-15   # date butoir absolue : aucune reddition ne peut être placée après
 
 
 # ---------------------------------------------------------------------
@@ -240,7 +240,7 @@ mandats:
     format: outil
     statut: valide
     dates:
-      g1: { debut: 2026-10-12, reddition: 2026-12-18 }   # À CORRIGER (dure tout le semestre)
+      g1: { debut: 2026-10-12, reddition: 2026-12-15 }   # À CORRIGER (dure tout le semestre)
     pdf_officiel: "https://drive.google.com/file/d/14n7AI-Y8aeKkeSpVuC1wB8o-sKcmHA-6/view?usp=drive_link"
 
     en_bref: |
@@ -302,7 +302,6 @@ mandats:
 
     avant_de_rendre:
       - "Mes photos sont lisibles"
-      - "Mes fiches couvrent plusieurs semaines"
       - "J'explique l'utilité avec un exemple précis"
 
 
@@ -482,7 +481,7 @@ mandats:
     format: retour
     statut: valide
     dates:
-      g1: { debut: 2026-10-13, reddition: 2026-12-22 }   # À CORRIGER
+      g1: { debut: 2026-10-13, reddition: 2026-12-15 }   # À CORRIGER
     pdf_officiel: "https://drive.google.com/file/d/1kkZFog-Tdnac_MAxk22p7uMXYGQUDV1j/view?usp=drive_link"
 
     en_bref: |
@@ -490,19 +489,20 @@ mandats:
       Tu prépares, tu présentes, tu analyses.
 
     mission_terrain: |
-      Tu vas **présenter l'équipe Culture+SP et ses prestations à des
-      clients**. Pour t'y préparer :
+      Tu vas peut-être **présenter l'équipe Culture+SP et ses prestations à des
+      clients**. Dans tous les cas, tu dois d'y préparer :
       - identifie les besoins fréquents des associations (demande à
         tes collègues) ;
       - pour chaque besoin, la prestation qui y répond et le **bénéfice
         concret pour le client** ;
       - prépare la réponse aux inconvénients possibles.
+      - entraîne toi à avoir la bonne posture et des phrases préparées
       Après la présentation, analyse : quels arguments ont porté,
       lesquels non, et pourquoi.
 
     livrables:
       - "Ton aperçu besoins / prestations / bénéfices / inconvénients"
-      - "Ton retour sur la présentation client"
+      - "Ton retour sur la présentation client, ou du moins la préparation à cet entretien"
       - "Ta case Learnings"
 
     learnings_pistes:
@@ -567,7 +567,7 @@ mandats:
     format: retour
     statut: proposition
     dates:
-      g1: { debut: 2026-10-13, reddition: 2026-12-22 }   # À CORRIGER
+      g1: { debut: 2026-10-13, reddition: 2026-12-08 }   # À CORRIGER
     pdf_officiel: "https://drive.google.com/file/d/1zhgCccSmLLiO1Reti94KHnvywmzMtaHR/view?usp=drive_link"
 
     en_bref: |
@@ -576,7 +576,7 @@ mandats:
       analyses la collaboration.
 
     mission_terrain: |
-      Avec moi, tu choisis **un mandat réel à plusieurs étapes** pour
+      **un mandat réel à plusieurs étapes** pour
       une association cliente ou pour l'équipe. Avant d'agir, tu
       construis l'**aperçu des informations** : quoi, où, sous quel
       format, qui informer, quel canal, quel contrôle. Tu exécutes le
@@ -585,6 +585,7 @@ mandats:
 
     livrables:
       - "Ton aperçu des informations (tableau)"
+      - "Un résumé de la mission et comment tu l'as gérée du début à la fin"
       - "Ton retour : ce qui a bien fonctionné, les malentendus, ce que tu changerais"
       - "Ta case Learnings"
 
